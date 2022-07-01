@@ -39,64 +39,66 @@ class CapsulePage extends StatelessWidget {
           SliverSafeArea(
             top: false,
             sliver: SliverToBoxAdapter(
-              child: RowLayout.body(children: <Widget>[
-                RowItem.text(
-                  FlutterI18n.translate(
-                    context,
-                    'spacex.dialog.vehicle.model',
-                  ),
-                  capsule.type,
-                ),
-                RowItem.text(
-                  FlutterI18n.translate(
-                    context,
-                    'spacex.dialog.vehicle.status',
-                  ),
-                  capsule.getStatus,
-                ),
-                RowItem.text(
-                  FlutterI18n.translate(
-                    context,
-                    'spacex.dialog.vehicle.first_launched',
-                  ),
-                  capsule.getFirstLaunched(context),
-                ),
-                RowItem.text(
-                  FlutterI18n.translate(
-                    context,
-                    'spacex.dialog.vehicle.launches',
-                  ),
-                  capsule.getLaunches,
-                ),
-                RowItem.text(
-                  FlutterI18n.translate(
-                    context,
-                    'spacex.dialog.vehicle.splashings',
-                  ),
-                  capsule.getSplashings,
-                ),
-                Separator.divider(),
-                if (capsule.hasMissions) ...[
-                  for (final launch in capsule.launches)
-                    RowTap(
-                      FlutterI18n.translate(
-                        context,
-                        'spacex.dialog.vehicle.mission',
-                        translationParams: {
-                          'number': launch.flightNumber.toString()
-                        },
-                      ),
-                      launch.name,
-                      onTap: () => Navigator.pushNamed(
-                        context,
-                        LaunchPage.route,
-                        arguments: {'id': launch.id},
-                      ),
+              child: RowLayout.body(
+                children: <Widget>[
+                  RowItem.text(
+                    FlutterI18n.translate(
+                      context,
+                      'spacex.dialog.vehicle.model',
                     ),
-                  Separator.divider()
+                    capsule.type,
+                  ),
+                  RowItem.text(
+                    FlutterI18n.translate(
+                      context,
+                      'spacex.dialog.vehicle.status',
+                    ),
+                    capsule.getStatus,
+                  ),
+                  RowItem.text(
+                    FlutterI18n.translate(
+                      context,
+                      'spacex.dialog.vehicle.first_launched',
+                    ),
+                    capsule.getFirstLaunched(context),
+                  ),
+                  RowItem.text(
+                    FlutterI18n.translate(
+                      context,
+                      'spacex.dialog.vehicle.launches',
+                    ),
+                    capsule.getLaunches,
+                  ),
+                  RowItem.text(
+                    FlutterI18n.translate(
+                      context,
+                      'spacex.dialog.vehicle.splashings',
+                    ),
+                    capsule.getSplashings,
+                  ),
+                  Separator.divider(),
+                  if (capsule.hasMissions) ...[
+                    for (final launch in capsule.launches)
+                      RowTap(
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.dialog.vehicle.mission',
+                          translationParams: {
+                            'number': launch.flightNumber.toString()
+                          },
+                        ),
+                        launch.name,
+                        onTap: () => Navigator.pushNamed(
+                          context,
+                          LaunchPage.route,
+                          arguments: {'id': launch.id},
+                        ),
+                      ),
+                    Separator.divider()
+                  ],
+                  ExpandText(capsule.getDetails(context))
                 ],
-                ExpandText(capsule.getDetails(context))
-              ]),
+              ),
             ),
           ),
         ],
