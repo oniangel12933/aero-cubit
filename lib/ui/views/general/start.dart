@@ -43,23 +43,25 @@ class _StartScreenState extends State<StartScreen> {
 
       Future.delayed(Duration.zero, () async {
         // Setting app shortcuts
-        await quickActions.setShortcutItems(<ShortcutItem>[
-          ShortcutItem(
-            type: 'vehicles',
-            localizedTitle: context.translate('spacex.vehicle.icon'),
-            icon: 'action_vehicle',
-          ),
-          ShortcutItem(
-            type: 'upcoming',
-            localizedTitle: context.translate('spacex.upcoming.icon'),
-            icon: 'action_upcoming',
-          ),
-          ShortcutItem(
-            type: 'latest',
-            localizedTitle: context.translate('spacex.latest.icon'),
-            icon: 'action_latest',
-          ),
-        ]);
+        await quickActions.setShortcutItems(
+          <ShortcutItem>[
+            ShortcutItem(
+              type: 'vehicles',
+              localizedTitle: context.translate('spacex.vehicle.icon'),
+              icon: 'action_vehicle',
+            ),
+            ShortcutItem(
+              type: 'upcoming',
+              localizedTitle: context.translate('spacex.upcoming.icon'),
+              icon: 'action_upcoming',
+            ),
+            ShortcutItem(
+              type: 'latest',
+              localizedTitle: context.translate('spacex.latest.icon'),
+              icon: 'action_latest',
+            ),
+          ],
+        );
       });
     } catch (_) {
       debugPrint('could set quick actions');
