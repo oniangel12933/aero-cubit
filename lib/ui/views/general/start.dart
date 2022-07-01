@@ -116,7 +116,7 @@ class _StartScreenState extends State<StartScreen> {
                       : Colors.black26
                   : Theme.of(context).brightness == Brightness.light
                       ? Theme.of(context).primaryColor
-                      : Theme.of(context).accentColor,
+                      : Theme.of(context).colorScheme.secondary,
             ),
           ),
           BottomNavigationBarItem(
