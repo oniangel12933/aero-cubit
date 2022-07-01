@@ -1,14 +1,13 @@
+import 'package:cherry/cubits/index.dart';
+import 'package:cherry/ui/views/launches/index.dart';
+import 'package:cherry/ui/widgets/index.dart';
+import 'package:cherry/utils/photos.dart';
 import 'package:expand_widget/expand_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:provider/provider.dart';
 import 'package:row_collection/row_collection.dart';
 import 'package:row_item/row_item.dart';
-
-import '../../../cubits/index.dart';
-import '../../../utils/photos.dart';
-import '../../widgets/index.dart';
-import 'index.dart';
 
 /// This view displays information about a specific capsule,
 /// used in a NASA mission.
