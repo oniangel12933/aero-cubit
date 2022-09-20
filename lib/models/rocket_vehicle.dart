@@ -7,24 +7,24 @@ import 'index.dart';
 
 /// General information about a Falcon rocket.
 class RocketVehicle extends Vehicle {
-  final num stages, launchCost, successRate;
-  final List<PayloadWeight> payloadWeights;
-  final Engine engine;
-  final Stage firstStage, secondStage;
-  final List<double> fairingDimensions;
+  final num? stages, launchCost, successRate;
+  final List<PayloadWeight>? payloadWeights;
+  final Engine? engine;
+  final Stage? firstStage, secondStage;
+  final List<double>? fairingDimensions;
 
   const RocketVehicle({
-    String id,
-    String name,
-    String type,
-    String description,
-    String url,
-    num height,
-    num diameter,
-    num mass,
-    bool active,
-    DateTime firstFlight,
-    List<String> photos,
+    String? id,
+    String? name,
+    String? type,
+    String? description,
+    String? url,
+    num? height,
+    num? diameter,
+    num? mass,
+    bool? active,
+    DateTime? firstFlight,
+    List<String>? photos,
     this.stages,
     this.launchCost,
     this.successRate,
@@ -91,52 +91,52 @@ class RocketVehicle extends Vehicle {
       NumberFormat.currency(symbol: "\$", decimalDigits: 0).format(launchCost);
 
   String getSuccessRate(BuildContext context) =>
-      DateTime.now().isAfter(firstFlight)
-          ? NumberFormat.percentPattern().format(successRate / 100)
+      DateTime.now().isAfter(firstFlight!)
+          ? NumberFormat.percentPattern().format(successRate! / 100)
           : context.translate('spacex.other.no_data');
 
-  String fairingHeight(BuildContext context) => fairingDimensions[0] == null
+  String fairingHeight(BuildContext context) => fairingDimensions![0] == null
       ? context.translate('spacex.other.unknown')
-      : '${NumberFormat.decimalPattern().format(fairingDimensions[0])} m';
+      : '${NumberFormat.decimalPattern().format(fairingDimensions![0])} m';
 
-  String fairingDiameter(BuildContext context) => fairingDimensions[1] == null
+  String fairingDiameter(BuildContext context) => fairingDimensions![1] == null
       ? context.translate('spacex.other.unknown')
-      : '${NumberFormat.decimalPattern().format(fairingDimensions[1])} m';
+      : '${NumberFormat.decimalPattern().format(fairingDimensions![1])} m';
 
   @override
   List<Object> get props => [
-        id,
-        name,
-        type,
-        description,
-        url,
-        height,
-        diameter,
-        mass,
-        active,
-        firstFlight,
-        photos,
-        stages,
-        launchCost,
-        successRate,
-        payloadWeights,
-        engine,
-        firstStage,
-        secondStage,
-        fairingDimensions,
+        id!,
+        name!,
+        type!,
+        description!,
+        url!,
+        height!,
+        diameter!,
+        mass!,
+        active!,
+        firstFlight!,
+        photos!,
+        stages!,
+        launchCost!,
+        successRate!,
+        payloadWeights!,
+        engine!,
+        firstStage!,
+        secondStage!,
+        fairingDimensions!,
       ];
 }
 
 /// Auxiliar model used to storage rocket's engine data.
 class Engine extends Equatable {
-  final num thrustSea;
-  final num thrustVacuum;
-  final num thrustToWeight;
-  final num ispSea;
-  final num ispVacuum;
-  final String name;
-  final String fuel;
-  final String oxidizer;
+  final num? thrustSea;
+  final num? thrustVacuum;
+  final num? thrustToWeight;
+  final num? ispSea;
+  final num? ispVacuum;
+  final String? name;
+  final String? fuel;
+  final String? oxidizer;
 
   const Engine({
     this.thrustSea,
@@ -177,22 +177,22 @@ class Engine extends Equatable {
   String get getIspVacuum =>
       '${NumberFormat.decimalPattern().format(ispVacuum)} s';
 
-  String get getName => toBeginningOfSentenceCase(name);
+  String? get getName => toBeginningOfSentenceCase(name);
 
-  String get getFuel => toBeginningOfSentenceCase(fuel);
+  String? get getFuel => toBeginningOfSentenceCase(fuel);
 
-  String get getOxidizer => toBeginningOfSentenceCase(oxidizer);
+  String? get getOxidizer => toBeginningOfSentenceCase(oxidizer);
 
   @override
   List<Object> get props => [
-        thrustSea,
-        thrustVacuum,
-        thrustToWeight,
-        ispSea,
-        ispVacuum,
-        name,
-        fuel,
-        oxidizer,
+        thrustSea!,
+        thrustVacuum!,
+        thrustToWeight!,
+        ispSea!,
+        ispVacuum!,
+        name!,
+        fuel!,
+        oxidizer!,
       ];
 }
 
@@ -218,10 +218,10 @@ class PayloadWeight extends Equatable {
 
 /// General information about a specific stage of a Falcon rocket.
 class Stage extends Equatable {
-  final bool reusable;
-  final num engines;
-  final num fuelAmount;
-  final num thrust;
+  final bool? reusable;
+  final num? engines;
+  final num? fuelAmount;
+  final num? thrust;
 
   const Stage({
     this.reusable,
@@ -255,9 +255,9 @@ class Stage extends Equatable {
 
   @override
   List<Object> get props => [
-        reusable,
-        engines,
-        fuelAmount,
-        thrust,
+        reusable!,
+        engines!,
+        fuelAmount!,
+        thrust!,
       ];
 }

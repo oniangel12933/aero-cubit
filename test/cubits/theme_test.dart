@@ -9,10 +9,10 @@ import 'helpers/hydrated.dart';
 void main() {
   initHydratedBloc();
   group('ThemeCubit', () {
-    ThemeCubit cubit;
+    ThemeCubit cubit = ThemeCubit();
 
     setUp(() {
-      cubit = ThemeCubit();
+      // cubit = ThemeCubit();
     });
 
     test('has initial value', () async {

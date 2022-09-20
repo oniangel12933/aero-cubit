@@ -14,18 +14,18 @@ import '../../widgets/index.dart';
 class LaunchpadPage extends StatelessWidget {
   final String launchId;
 
-  const LaunchpadPage({Key key, this.launchId}) : super(key: key);
+  const LaunchpadPage({Key? key,required this.launchId}) : super(key: key);
 
   static const route = '/launchpad';
 
   @override
   Widget build(BuildContext context) {
     final launchpad =
-        context.watch<LaunchesCubit>().getLaunch(launchId).launchpad;
+        context.watch<LaunchesCubit>().getLaunch(launchId)!.launchpad;
 
     return Scaffold(
       body: SliverPage(
-        title: launchpad.name,
+        title: launchpad!.name!,
         header: CacheImage(launchpad.imageUrl),
         children: <Widget>[
           SliverSafeArea(
@@ -33,21 +33,21 @@ class LaunchpadPage extends StatelessWidget {
             sliver: SliverToBoxAdapter(
               child: RowLayout.body(children: <Widget>[
                 Text(
-                  launchpad.fullName,
+                  launchpad.fullName!,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.subtitle1,
                 ),
                 RowItem.text(
                   context.translate('spacex.dialog.pad.status'),
-                  launchpad.getStatus,
+                  launchpad.getStatus!,
                 ),
                 RowItem.text(
                   context.translate('spacex.dialog.pad.location'),
-                  launchpad.locality,
+                  launchpad.locality!,
                 ),
                 RowItem.text(
                   context.translate('spacex.dialog.pad.state'),
-                  launchpad.region,
+                  launchpad.region!,
                 ),
                 RowItem.text(
                   context.translate('spacex.dialog.pad.coordinates'),
@@ -58,7 +58,7 @@ class LaunchpadPage extends StatelessWidget {
                   launchpad.getSuccessfulLaunches,
                 ),
                 Separator.divider(),
-                ExpandText(launchpad.details)
+                ExpandText(launchpad.details!)
               ]),
             ),
           ),

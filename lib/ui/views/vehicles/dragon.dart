@@ -19,13 +19,13 @@ class DragonPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DragonVehicle _dragon = context.watch<VehiclesCubit>().getVehicle(id);
+    final DragonVehicle _dragon = context.watch<VehiclesCubit>().getVehicle(id) as DragonVehicle;
     return Scaffold(
       body: CustomScrollView(slivers: <Widget>[
         SliverBar(
           title: _dragon.name,
           header: SwiperHeader(
-            list: _dragon.photos,
+            list: _dragon.photos!,
             builder: (_, index) => CacheImage(_dragon.getPhoto(index)),
           ),
           actions: <Widget>[
@@ -35,7 +35,7 @@ class DragonPage extends StatelessWidget {
                 context.translate(
                   'spacex.other.share.capsule.body',
                   parameters: {
-                    'name': _dragon.name,
+                    'name': _dragon.name!,
                     'launch_payload': _dragon.getLaunchMass,
                     'return_payload': _dragon.getReturnMass,
                     'people': _dragon.isCrewEnabled
@@ -59,7 +59,7 @@ class DragonPage extends StatelessWidget {
                 child: Text(context.translate(item)),
               )
           ],
-          onMenuItemSelected: (text) => context.openUrl(_dragon.url),
+          onMenuItemSelected: (text) => context.openUrl(_dragon.url!),
         ),
         SliverSafeArea(
           top: false,
@@ -76,7 +76,7 @@ class DragonPage extends StatelessWidget {
   }
 
   Widget _capsuleCard(BuildContext context) {
-    final DragonVehicle _dragon = context.watch<VehiclesCubit>().getVehicle(id);
+    final DragonVehicle _dragon = context.watch<VehiclesCubit>().getVehicle(id) as DragonVehicle;
     return CardCell.body(
       context,
       title: context.translate('spacex.vehicle.capsule.description.title'),
@@ -94,13 +94,13 @@ class DragonPage extends StatelessWidget {
           _dragon.active,
         ),
         Separator.divider(),
-        ExpandText(_dragon.description)
+        ExpandText(_dragon.description!)
       ]),
     );
   }
 
   Widget _specsCard(BuildContext context) {
-    final DragonVehicle _dragon = context.watch<VehiclesCubit>().getVehicle(id);
+    final DragonVehicle _dragon = context.watch<VehiclesCubit>().getVehicle(id) as DragonVehicle;
     return CardCell.body(
       context,
       title: context.translate('spacex.vehicle.capsule.specifications.title'),
@@ -139,27 +139,27 @@ class DragonPage extends StatelessWidget {
   }
 
   Widget _thrustersCard(BuildContext context) {
-    final DragonVehicle _dragon = context.watch<VehiclesCubit>().getVehicle(id);
+    final DragonVehicle _dragon = context.watch<VehiclesCubit>().getVehicle(id) as DragonVehicle;
     return CardCell.body(
       context,
       title: context.translate('spacex.vehicle.capsule.thruster.title'),
       child: RowLayout(children: <Widget>[
-        for (final thruster in _dragon.thrusters)
+        for (final thruster in _dragon.thrusters!)
           _getThruster(
             context: context,
             thruster: thruster,
-            isFirst: _dragon.thrusters.first == thruster,
+            isFirst: _dragon.thrusters!.first == thruster,
           ),
       ]),
     );
   }
 
-  Widget _getThruster({BuildContext context, Thruster thruster, bool isFirst}) {
+  Widget _getThruster({required BuildContext context, required Thruster thruster, required bool isFirst}) {
     return RowLayout(children: <Widget>[
       if (!isFirst) Separator.divider(),
       RowItem.text(
         context.translate('spacex.vehicle.capsule.thruster.model'),
-        thruster.model,
+        thruster.model!,
       ),
       RowItem.text(
         context.translate('spacex.vehicle.capsule.thruster.amount'),
@@ -167,11 +167,11 @@ class DragonPage extends StatelessWidget {
       ),
       RowItem.text(
         context.translate('spacex.vehicle.capsule.thruster.fuel'),
-        thruster.getFuel,
+        thruster.getFuel!,
       ),
       RowItem.text(
         context.translate('spacex.vehicle.capsule.thruster.oxidizer'),
-        thruster.getOxidizer,
+        thruster.getOxidizer!,
       ),
       RowItem.text(
         context.translate('spacex.vehicle.capsule.thruster.thrust'),

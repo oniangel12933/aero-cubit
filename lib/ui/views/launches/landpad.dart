@@ -16,9 +16,9 @@ class LandpadPage extends StatelessWidget {
   final String coreId;
 
   const LandpadPage({
-    Key key,
-    this.launchId,
-    this.coreId,
+    Key? key,
+    required this.launchId,
+    required this.coreId,
   }) : super(key: key);
 
   static const route = '/landpad';
@@ -28,13 +28,13 @@ class LandpadPage extends StatelessWidget {
     final landpad = context
         .watch<LaunchesCubit>()
         .getLaunch(launchId)
-        .rocket
-        .getCore(coreId)
+        ?.rocket
+        ?.getCore(coreId)
         .landpad;
 
     return Scaffold(
       body: SliverPage(
-        title: landpad.name,
+        title: landpad!.name!,
         header: CacheImage(landpad.imageUrl),
         children: <Widget>[
           SliverSafeArea(
@@ -42,19 +42,19 @@ class LandpadPage extends StatelessWidget {
             sliver: SliverToBoxAdapter(
               child: RowLayout.body(children: <Widget>[
                 Text(
-                  landpad.fullName,
+                  landpad.fullName!,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.subtitle1,
                 ),
                 RowItem.text(
                   context.translate('spacex.dialog.pad.status'),
-                  landpad.getStatus,
+                  landpad.getStatus!,
                 ),
                 RowItem.text(context.translate('spacex.dialog.pad.location'),
-                    landpad.locality),
+                    landpad.locality!),
                 RowItem.text(
                   context.translate('spacex.dialog.pad.state'),
-                  landpad.region,
+                  landpad.region!,
                 ),
                 RowItem.text(
                   context.translate('spacex.dialog.pad.coordinates'),
@@ -62,14 +62,14 @@ class LandpadPage extends StatelessWidget {
                 ),
                 RowItem.text(
                   context.translate('spacex.dialog.pad.landing_type'),
-                  landpad.type,
+                  landpad.type!,
                 ),
                 RowItem.text(
                   context.translate('spacex.dialog.pad.landings_successful'),
                   landpad.getSuccessfulLandings,
                 ),
                 Separator.divider(),
-                ExpandText(landpad.details)
+                ExpandText(landpad.details!)
               ]),
             ),
           ),

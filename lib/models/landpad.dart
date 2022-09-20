@@ -5,20 +5,20 @@ import 'package:latlong2/latlong.dart';
 /// Details about a specific landpad,
 /// where boosters can land after completing its mission.
 class LandpadDetails extends Equatable {
-  final String name;
-  final String fullName;
-  final String type;
-  final String locality;
-  final String region;
-  final double latitude;
-  final double longitude;
-  final int landingAttempts;
-  final int landingSuccesses;
-  final String wikipediaUrl;
-  final String details;
-  final String status;
-  final String imageUrl;
-  final String id;
+  final String? name;
+  final String? fullName;
+  final String? type;
+  final String? locality;
+  final String? region;
+  final double? latitude;
+  final double? longitude;
+  final int? landingAttempts;
+  final int? landingSuccesses;
+  final String? wikipediaUrl;
+  final String? details;
+  final String? status;
+  final String? imageUrl;
+  final String? id;
 
   const LandpadDetails({
     this.name,
@@ -56,9 +56,9 @@ class LandpadDetails extends Equatable {
     );
   }
 
-  LatLng get coordinates => LatLng(latitude, longitude);
+  LatLng get coordinates => LatLng(latitude!, longitude!);
 
-  String get getStatus => toBeginningOfSentenceCase(status);
+  String? get getStatus => toBeginningOfSentenceCase(status);
 
   String get getCoordinates =>
       '${coordinates.latitude.toStringAsPrecision(5)},  ${coordinates.longitude.toStringAsPrecision(5)}';
@@ -67,18 +67,18 @@ class LandpadDetails extends Equatable {
 
   @override
   List<Object> get props => [
-        name,
-        fullName,
-        type,
-        locality,
-        region,
-        latitude,
-        longitude,
-        landingAttempts,
-        landingSuccesses,
-        wikipediaUrl,
-        details,
-        status,
-        id,
+        name!,
+        fullName!,
+        type!,
+        locality!,
+        region!,
+        latitude!,
+        longitude!,
+        landingAttempts!,
+        landingSuccesses!,
+        wikipediaUrl!,
+        details!,
+        status!,
+        id!,
       ];
 }

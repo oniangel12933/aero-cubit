@@ -7,24 +7,24 @@ import 'index.dart';
 
 /// Auxiliary model to storage details about a core in a particular mission.
 class Core extends Equatable {
-  final int block;
-  final int reuseCount;
-  final int rtlsAttempts;
-  final int rtlsLandings;
-  final int asdsAttempts;
-  final int asdsLandings;
-  final String lastUpdate;
-  final List<LaunchDetails> launches;
-  final String serial;
-  final String status;
-  final String id;
-  final String landingType;
-  final bool hasGridfins;
-  final bool hasLegs;
-  final bool reused;
-  final bool landingAttempt;
-  final bool landingSuccess;
-  final LandpadDetails landpad;
+  final int? block;
+  final int? reuseCount;
+  final int? rtlsAttempts;
+  final int? rtlsLandings;
+  final int? asdsAttempts;
+  final int? asdsLandings;
+  final String? lastUpdate;
+  final List<LaunchDetails>? launches;
+  final String? serial;
+  final String? status;
+  final String? id;
+  final String? landingType;
+  final bool? hasGridfins;
+  final bool? hasLegs;
+  final bool? reused;
+  final bool? landingAttempt;
+  final bool? landingSuccess;
+  final LandpadDetails? landpad;
 
   const Core({
     this.block,
@@ -76,15 +76,15 @@ class Core extends Equatable {
     );
   }
 
-  String get getStatus => toBeginningOfSentenceCase(status);
+  String? get getStatus => toBeginningOfSentenceCase(status);
 
-  String getFirstLaunched(BuildContext context) => launches.isNotEmpty
-      ? DateFormat.yMMMMd().format(launches.first.localDate)
+  String getFirstLaunched(BuildContext context) => launches!.isNotEmpty
+      ? DateFormat.yMMMMd().format(launches!.first.localDate)
       : context.translate('spacex.other.unknown');
 
-  String get getLaunches => launches.length.toString();
+  String get getLaunches => launches!.length.toString();
 
-  bool get hasMissions => launches.isNotEmpty;
+  bool get hasMissions => launches!.isNotEmpty;
 
   String getDetails(BuildContext context) =>
       lastUpdate ??
@@ -93,7 +93,7 @@ class Core extends Equatable {
   String getBlock(BuildContext context) =>
       getBlockData(context) ?? context.translate('spacex.other.unknown');
 
-  String getBlockData(BuildContext context) => block != null
+  String? getBlockData(BuildContext context) => block != null
       ? context.translate(
           'spacex.other.block',
           parameters: {'block': block.toString()},
@@ -106,22 +106,22 @@ class Core extends Equatable {
 
   @override
   List<Object> get props => [
-        block,
-        reuseCount,
-        rtlsAttempts,
-        rtlsLandings,
-        asdsAttempts,
-        asdsLandings,
-        lastUpdate,
-        launches,
-        serial,
-        status,
-        id,
-        hasGridfins,
-        hasLegs,
-        reused,
-        landingAttempt,
-        landingSuccess,
-        landpad,
+        block!,
+        reuseCount!,
+        rtlsAttempts!,
+        rtlsLandings!,
+        asdsAttempts!,
+        asdsLandings!,
+        lastUpdate!,
+        launches!,
+        serial!,
+        status!,
+        id!,
+        hasGridfins!,
+        hasLegs!,
+        reused!,
+        landingAttempt!,
+        landingSuccess!,
+        landpad!,
       ];
 }

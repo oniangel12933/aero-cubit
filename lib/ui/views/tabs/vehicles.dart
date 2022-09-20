@@ -18,7 +18,7 @@ class VehiclesTab extends StatelessWidget {
         title: context.translate('spacex.vehicle.title'),
         headerBuilder: (context, state, value) {
           final photos = [
-            for (final vehicle in value) vehicle.getRandomPhoto()
+            for (final vehicle in value!) vehicle.getRandomPhoto()
           ];
 
           return SwiperHeader(list: photos.sublist(0, 4));
@@ -42,7 +42,7 @@ class VehiclesTab extends StatelessWidget {
           onPressed: () => showSearch(
             context: context,
             delegate: SearchPage<Vehicle>(
-              items: value,
+              items: value!,
               searchLabel: context.translate(
                 'spacex.other.tooltip.search',
               ),
@@ -51,7 +51,7 @@ class VehiclesTab extends StatelessWidget {
                   context.translate(
                     'spacex.vehicle.title',
                   ),
-                  style: Theme.of(context).textTheme.headline6.copyWith(
+                  style: Theme.of(context).textTheme.headline6?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
                 ),
@@ -59,8 +59,8 @@ class VehiclesTab extends StatelessWidget {
                   context.translate(
                     'spacex.search.suggestion.vehicle',
                   ),
-                  style: Theme.of(context).textTheme.subtitle1.copyWith(
-                        color: Theme.of(context).textTheme.caption.color,
+                  style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                        color: Theme.of(context).textTheme.caption?.color,
                       ),
                 ),
                 child: Icon(Icons.search),
@@ -70,7 +70,7 @@ class VehiclesTab extends StatelessWidget {
                   context.translate(
                     'spacex.vehicle.title',
                   ),
-                  style: Theme.of(context).textTheme.headline6.copyWith(
+                  style: Theme.of(context).textTheme.headline6?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
                 ),
@@ -78,8 +78,8 @@ class VehiclesTab extends StatelessWidget {
                   context.translate(
                     'spacex.search.failure',
                   ),
-                  style: Theme.of(context).textTheme.subtitle1.copyWith(
-                        color: Theme.of(context).textTheme.caption.color,
+                  style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                        color: Theme.of(context).textTheme.caption?.color,
                       ),
                 ),
                 child: Icon(Icons.sentiment_dissatisfied),

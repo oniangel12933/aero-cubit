@@ -10,11 +10,11 @@ class MockLaunchesService extends Mock implements LaunchesService {}
 
 void main() {
   group('LaunchesRepository', () {
-    MockLaunchesService service;
-    LaunchesRepository repository;
+    MockLaunchesService service = MockLaunchesService();
+    LaunchesRepository? repository;
 
     setUp(() {
-      service = MockLaunchesService();
+      // service = MockLaunchesService();
       repository = LaunchesRepository(service);
     });
 
@@ -184,10 +184,10 @@ void main() {
       when(response.data).thenReturn(json);
       when(service.getLaunches()).thenAnswer((_) => Future.value(response));
 
-      final output = await repository.fetchData();
+      final output = await repository!.fetchData();
       expect(output, [
         [],
-        [Launch.fromJson(json['docs'].single)]
+        [Launch.fromJson(json['docs']!.single)]
       ]);
     });
   });

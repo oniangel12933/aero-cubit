@@ -9,11 +9,11 @@ class ProfileImage extends StatelessWidget {
 
   final String url;
   final num size;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   const ProfileImage({
-    @required this.url,
-    @required this.size,
+    required this.url,
+    required this.size,
     this.onTap,
   });
 
@@ -23,15 +23,15 @@ class ProfileImage extends StatelessWidget {
   }
 
   /// Header of a [CardCell] widget.
-  factory ProfileImage.big(String url, {VoidCallback onTap}) {
+  factory ProfileImage.big(String url, {VoidCallback? onTap}) {
     return ProfileImage(url: url, size: bigSize, onTap: onTap);
   }
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: size,
-      height: size,
+      width: size.toDouble(),
+      height: size.toDouble(),
       child: InkWell(
         onTap: onTap,
         child: url != null

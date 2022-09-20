@@ -10,11 +10,11 @@ class MockVehiclesService extends Mock implements VehiclesService {}
 
 void main() {
   group('VehiclesRepository', () {
-    MockVehiclesService service;
-    VehiclesRepository repository;
+    MockVehiclesService service = MockVehiclesService();
+    VehiclesRepository? repository;
 
     setUp(() {
-      service = MockVehiclesService();
+      // service = MockVehiclesService();
       repository = VehiclesRepository(service);
     });
 
@@ -203,12 +203,12 @@ void main() {
       ).thenAnswer((_) => Future.value(shipResponse));
       when(shipResponse.data).thenReturn(shipJson);
 
-      final output = await repository.fetchData();
+      final output = await repository!.fetchData();
       expect(output, [
         RoadsterVehicle.fromJson(roadsterJson),
-        DragonVehicle.fromJson(dragonJson['docs'].single),
-        RocketVehicle.fromJson(rocketJson['docs'].single),
-        ShipVehicle.fromJson(shipJson['docs'].single),
+        DragonVehicle.fromJson(dragonJson['docs']!.single),
+        RocketVehicle.fromJson(rocketJson['docs']!.single),
+        ShipVehicle.fromJson(shipJson['docs']!.single),
       ]);
     });
   });

@@ -19,7 +19,7 @@ class LaunchCountdown extends StatefulWidget {
 
 class _LaunchCountdownState extends State<LaunchCountdown>
     with TickerProviderStateMixin {
-  AnimationController _controller;
+  AnimationController? _controller;
 
   @override
   void initState() {
@@ -31,12 +31,12 @@ class _LaunchCountdownState extends State<LaunchCountdown>
             DateTime.now().millisecondsSinceEpoch,
       ),
     );
-    _controller.forward(from: 0.0);
+    _controller!.forward(from: 0.0);
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller?.dispose();
     super.dispose();
   }
 
@@ -46,7 +46,7 @@ class _LaunchCountdownState extends State<LaunchCountdown>
       animation: StepTween(
         begin: widget.launchDate.millisecondsSinceEpoch,
         end: DateTime.now().millisecondsSinceEpoch,
-      ).animate(_controller),
+      ).animate(_controller!),
       launchDate: widget.launchDate,
     );
   }
@@ -57,9 +57,9 @@ class Countdown extends AnimatedWidget {
   final DateTime launchDate;
 
   const Countdown({
-    Key key,
-    this.animation,
-    this.launchDate,
+    Key? key,
+    required this.animation,
+    required this.launchDate,
   }) : super(key: key, listenable: animation);
 
   @override
@@ -105,9 +105,9 @@ class Countdown extends AnimatedWidget {
   }
 
   Widget _countdownChild({
-    BuildContext context,
-    String title,
-    String description,
+    required BuildContext context,
+    required String title,
+    required String description,
   }) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -118,7 +118,7 @@ class Countdown extends AnimatedWidget {
     );
   }
 
-  Widget _countdownText({BuildContext context, double fontSize, String text}) {
+  Widget _countdownText({required BuildContext context, required double fontSize, required String text}) {
     return Text(
       text,
       style: GoogleFonts.robotoMono(

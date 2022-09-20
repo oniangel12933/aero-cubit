@@ -71,11 +71,11 @@ class _StartScreenState extends State<StartScreen> {
   @override
   Widget build(BuildContext context) {
     try {
-      context.watch<NotificationsCubit>()?.updateNotifications(
+      context.watch<NotificationsCubit>().updateNotifications(
             context,
             nextLaunch: LaunchUtils.getUpcomingLaunch(
-              context.watch<LaunchesCubit>().state.value,
-            ),
+              context.watch<LaunchesCubit>().state.value!,
+            )!,
           );
     } catch (_) {
       debugPrint('could set notifications');
@@ -112,7 +112,7 @@ class _StartScreenState extends State<StartScreen> {
               height: 24,
               color: _currentIndex != 1
                   ? Theme.of(context).brightness == Brightness.light
-                      ? Theme.of(context).textTheme.caption.color
+                      ? Theme.of(context).textTheme.caption?.color
                       : Colors.black26
                   : Theme.of(context).brightness == Brightness.light
                       ? Theme.of(context).primaryColor

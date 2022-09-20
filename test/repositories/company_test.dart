@@ -10,11 +10,11 @@ class MockCompanyService extends Mock implements CompanyService {}
 
 void main() {
   group('CompanyRepository', () {
-    MockCompanyService service;
-    CompanyRepository repository;
+    MockCompanyService service = MockCompanyService();
+    CompanyRepository? repository;
 
     setUp(() {
-      service = MockCompanyService();
+      // service = MockCompanyService();
       repository = CompanyRepository(service);
     });
 
@@ -54,7 +54,7 @@ void main() {
         service.getCompanyInformation(),
       ).thenAnswer((_) => Future.value(response));
 
-      final output = await repository.fetchData();
+      final output = await repository!.fetchData();
       expect(output, CompanyInfo.fromJson(json));
     });
   });

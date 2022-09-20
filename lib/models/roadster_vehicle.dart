@@ -7,24 +7,24 @@ import 'index.dart';
 /// Details about Elon Musk's Tesla Roadster launched on top of a Falcon Heavy
 /// at February 6, 2018. Currently orbiting the Sun, between Earth & Mars.
 class RoadsterVehicle extends Vehicle {
-  final String orbit;
-  final String video;
-  final num apoapsis;
-  final num periapsis;
-  final num inclination;
-  final num longitude;
-  final num period;
-  final num speed;
-  final num earthDistance;
-  final num marsDistance;
+  final String? orbit;
+  final String? video;
+  final num? apoapsis;
+  final num? periapsis;
+  final num? inclination;
+  final num? longitude;
+  final num? period;
+  final num? speed;
+  final num? earthDistance;
+  final num? marsDistance;
 
   const RoadsterVehicle({
-    String id,
-    String description,
-    String url,
-    num mass,
-    DateTime firstFlight,
-    List<String> photos,
+    String? id,
+    String? description,
+    String? url,
+    num? mass,
+    DateTime? firstFlight,
+    List<String>? photos,
     this.orbit,
     this.video,
     this.apoapsis,
@@ -76,9 +76,9 @@ class RoadsterVehicle extends Vehicle {
       );
 
   String getLaunchDate(BuildContext context) =>
-      DateFormat.yMMMMd().format(firstFlight);
+      DateFormat.yMMMMd().format(firstFlight!);
 
-  String get getOrbit => toBeginningOfSentenceCase(orbit);
+  String? get getOrbit => toBeginningOfSentenceCase(orbit);
 
   String get getApoapsis =>
       '${NumberFormat.decimalPattern().format(apoapsis)} ua';
@@ -95,36 +95,36 @@ class RoadsterVehicle extends Vehicle {
   String getPeriod(BuildContext context) => context.translate(
         'spacex.vehicle.roadster.orbit.days',
         parameters: {
-          'days': NumberFormat.decimalPattern().format(period.round())
+          'days': NumberFormat.decimalPattern().format(period!.round())
         },
       );
 
   String get getSpeed =>
-      '${NumberFormat.decimalPattern().format(speed.round())} km/h';
+      '${NumberFormat.decimalPattern().format(speed!.round())} km/h';
 
   String get getEarthDistance =>
-      '${NumberFormat.decimalPattern().format(earthDistance.round())} km';
+      '${NumberFormat.decimalPattern().format(earthDistance!.round())} km';
 
   String get getMarsDistance =>
-      '${NumberFormat.decimalPattern().format(marsDistance.round())} km';
+      '${NumberFormat.decimalPattern().format(marsDistance!.round())} km';
 
   @override
   List<Object> get props => [
-        id,
-        description,
-        url,
-        mass,
-        firstFlight,
-        photos,
-        orbit,
-        video,
-        apoapsis,
-        periapsis,
-        inclination,
-        longitude,
-        period,
-        speed,
-        earthDistance,
-        marsDistance,
+        id!,
+        description!,
+        url!,
+        mass!,
+        firstFlight!,
+        photos!,
+        orbit!,
+        video!,
+        apoapsis!,
+        periapsis!,
+        inclination!,
+        longitude!,
+        period!,
+        speed!,
+        earthDistance!,
+        marsDistance!,
       ];
 }

@@ -20,9 +20,9 @@ class VehiclesCubit extends RequestCubit<VehiclesRepository, List<Vehicle>> {
     }
   }
 
-  Vehicle getVehicle(String id) {
+  Vehicle? getVehicle(String id) {
     if (state.status == RequestStatus.loaded) {
-      return state.value.where((l) => l.id == id).single;
+      return state.value!.where((l) => l.id == id).single;
     } else {
       return null;
     }

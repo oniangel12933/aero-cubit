@@ -7,11 +7,11 @@ import './mock.dart';
 
 void main() {
   group('AchievementsService', () {
-    MockClient client;
-    AchievementsService service;
+    MockClient client= MockClient();
+    AchievementsService? service;
 
     setUp(() {
-      client = MockClient();
+      // client = MockClient();
       service = AchievementsService(client);
     });
 
@@ -25,7 +25,7 @@ void main() {
         client.get(Url.companyAchievements),
       ).thenAnswer((_) => Future.value(response));
 
-      final output = await service.getAchievements();
+      final output = await service!.getAchievements();
       expect(output.data.cast<String>(), json);
     });
   });

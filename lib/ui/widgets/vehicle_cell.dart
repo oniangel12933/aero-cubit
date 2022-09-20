@@ -9,7 +9,7 @@ import 'index.dart';
 class VehicleCell extends StatelessWidget {
   final Vehicle vehicle;
 
-  const VehicleCell(this.vehicle, {Key key}) : super(key: key);
+  const VehicleCell(this.vehicle, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -10,11 +10,11 @@ import '../../utils/index.dart';
 /// It allows the user to scroll through multiple shots.
 class SwiperHeader extends StatefulWidget {
   final List<String> list;
-  final IndexedWidgetBuilder builder;
+  final IndexedWidgetBuilder? builder;
 
   const SwiperHeader({
-    Key key,
-    @required this.list,
+    Key? key,
+    required this.list,
     this.builder,
   }) : super(key: key);
 
@@ -23,7 +23,7 @@ class SwiperHeader extends StatefulWidget {
 }
 
 class _SwiperHeaderState extends State<SwiperHeader> {
-  List<String> auxList;
+  List<String>? auxList;
 
   @override
   void initState() {
@@ -42,12 +42,12 @@ class _SwiperHeaderState extends State<SwiperHeader> {
     return Swiper(
       itemCount: widget.list.length,
       itemBuilder:
-          widget.builder ?? (context, index) => CacheImage(auxList[index]),
+          widget.builder ?? (context, index) => CacheImage(auxList![index]),
       curve: Curves.easeInOutCubic,
       autoplayDelay: 5000,
       autoplay: true,
       duration: 850,
-      onTap: (index) => context.openUrl(auxList[index]),
+      onTap: (index) => context.openUrl(auxList![index]),
     );
   }
 

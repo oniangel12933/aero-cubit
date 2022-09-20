@@ -1,8 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:flutter_request_bloc/flutter_request_bloc.dart';
 import 'package:cherry/cubits/index.dart';
 import 'package:cherry/models/index.dart';
 import 'package:cherry/repositories/index.dart';
+import 'package:flutter_request_bloc/flutter_request_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -10,16 +10,16 @@ class MockLaunchesRepository extends Mock implements LaunchesRepository {}
 
 void main() {
   group('LaunchesCubit', () {
-    LaunchesCubit cubit;
-    MockLaunchesRepository repository;
+    LaunchesCubit? cubit;
+    MockLaunchesRepository repository = MockLaunchesRepository();
 
     setUp(() {
-      repository = MockLaunchesRepository();
+      // repository = MockLaunchesRepository();
       cubit = LaunchesCubit(repository);
     });
 
     tearDown(() {
-      cubit.close();
+      cubit!.close();
     });
 
     group('fetchData', () {
@@ -31,7 +31,7 @@ void main() {
               [Launch(id: '1')]
             ]),
           );
-          return cubit;
+          return cubit!;
         },
         act: (cubit) async => cubit.loadData(),
         verify: (_) => verify(repository.fetchData()).called(2),
@@ -47,7 +47,7 @@ void main() {
         'can throw an exception',
         build: () {
           when(repository.fetchData()).thenThrow(Exception('wtf'));
-          return cubit;
+          return cubit!;
         },
         act: (cubit) async => cubit.loadData(),
         verify: (_) => verify(repository.fetchData()).called(2),
@@ -66,8 +66,8 @@ void main() {
             [Launch(id: '2')]
           ]),
         );
-        await cubit.loadData();
-        expect(cubit.getLaunch('1'), Launch(id: '1'));
+        await cubit!.loadData();
+        expect(cubit!.getLaunch('1'), Launch(id: '1'));
       });
     });
   });

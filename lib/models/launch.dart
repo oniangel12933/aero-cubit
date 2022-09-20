@@ -9,22 +9,22 @@ import 'index.dart';
 /// Details about a specific launch, performed by a Falcon rocket,
 /// including launch & landing pads, rocket & payload information...
 class Launch extends Equatable implements Comparable<Launch> {
-  final String patchUrl;
-  final List<String> links;
-  final List<String> photos;
-  final DateTime staticFireDate;
-  final int launchWindow;
-  final bool success;
-  final FailureDetails failure;
-  final String details;
-  final RocketDetails rocket;
-  final LaunchpadDetails launchpad;
-  final int flightNumber;
-  final String name;
-  final DateTime launchDate;
-  final String datePrecision;
-  final bool upcoming;
-  final String id;
+  final String? patchUrl;
+  final List<String>? links;
+  final List<String>? photos;
+  final DateTime? staticFireDate;
+  final int? launchWindow;
+  final bool? success;
+  final FailureDetails? failure;
+  final String? details;
+  final RocketDetails? rocket;
+  final LaunchpadDetails? launchpad;
+  final int? flightNumber;
+  final String? name;
+  final DateTime? launchDate;
+  final String? datePrecision;
+  final bool? upcoming;
+  final String? id;
 
   const Launch({
     this.patchUrl,
@@ -76,7 +76,7 @@ class Launch extends Equatable implements Comparable<Launch> {
   }
 
   @override
-  int compareTo(Launch other) => flightNumber.compareTo(other.flightNumber);
+  int compareTo(Launch other) => flightNumber!.compareTo(other.flightNumber!);
 
   String getLaunchWindow(BuildContext context) {
     if (launchWindow == null) {
@@ -85,28 +85,28 @@ class Launch extends Equatable implements Comparable<Launch> {
       return context.translate(
         'spacex.launch.page.rocket.instantaneous_window',
       );
-    } else if (launchWindow < 60) {
+    } else if (launchWindow! < 60) {
       return '$launchWindow s';
-    } else if (launchWindow < 3600) {
-      return '${(launchWindow / 60).truncate()} min';
-    } else if (launchWindow % 3600 == 0) {
-      return '${(launchWindow / 3600).truncate()} h';
+    } else if (launchWindow! < 3600) {
+      return '${(launchWindow! / 60).truncate()} min';
+    } else if (launchWindow! % 3600 == 0) {
+      return '${(launchWindow! / 3600).truncate()} h';
     } else {
-      return '${(launchWindow ~/ 3600).truncate()}h ${((launchWindow / 3600 - launchWindow ~/ 3600) * 60).truncate()}min';
+      return '${(launchWindow! ~/ 3600).truncate()}h ${((launchWindow! / 3600 - launchWindow! ~/ 3600) * 60).truncate()}min';
     }
   }
 
-  DateTime get localLaunchDate => launchDate?.toLocal();
+  DateTime get localLaunchDate => launchDate!.toLocal();
 
-  DateTime get localStaticFireDate => staticFireDate?.toLocal();
+  DateTime get localStaticFireDate => staticFireDate!.toLocal();
 
   String get getNumber => '#${NumberFormat('00').format(flightNumber)}';
 
   bool get hasPatch => patchUrl != null;
 
-  bool get hasVideo => links[0] != null;
+  bool get hasVideo => links![0] != null;
 
-  String get getVideo => links[0];
+  String get getVideo => links![0];
 
   bool get tentativeTime => datePrecision != 'hour';
 
@@ -166,42 +166,42 @@ class Launch extends Equatable implements Comparable<Launch> {
 
   static int getMenuIndex(String url) => Menu.launch.indexOf(url) + 1;
 
-  bool isUrlEnabled(String url) => links[getMenuIndex(url)] != null;
+  bool isUrlEnabled(String url) => links![getMenuIndex(url)] != null;
 
-  String getUrl(String name) => links[getMenuIndex(name)];
+  String getUrl(String name) => links![getMenuIndex(name)];
 
-  bool get hasPhotos => photos.isNotEmpty;
+  bool get hasPhotos => photos!.isNotEmpty;
 
-  bool get avoidedStaticFire => !upcoming && staticFireDate == null;
+  bool get avoidedStaticFire => !upcoming! && staticFireDate == null;
 
   @override
   List<Object> get props => [
-        patchUrl,
-        links,
-        photos,
-        staticFireDate,
-        launchWindow,
-        success,
-        failure,
-        details,
-        rocket,
-        launchpad,
-        flightNumber,
-        name,
-        launchDate,
-        datePrecision,
-        upcoming,
-        id,
+        patchUrl!,
+        links!,
+        photos!,
+        staticFireDate!,
+        launchWindow!,
+        success!,
+        failure!,
+        details!,
+        rocket!,
+        launchpad!,
+        flightNumber!,
+        name!,
+        launchDate!,
+        datePrecision!,
+        upcoming!,
+        id!,
       ];
 }
 
 /// Auxiliary model to storage all details about a rocket which performed a SpaceX's mission.
 class RocketDetails extends Equatable {
-  final FairingsDetails fairings;
-  final List<Core> cores;
-  final List<Payload> payloads;
-  final String name;
-  final String id;
+  final FairingsDetails? fairings;
+  final List<Core>? cores;
+  final List<Payload>? payloads;
+  final String? name;
+  final String? id;
 
   const RocketDetails({
     this.fairings,
@@ -226,50 +226,50 @@ class RocketDetails extends Equatable {
     );
   }
 
-  bool get isHeavy => cores.length != 1;
+  bool get isHeavy => cores!.length != 1;
 
   bool get hasFairings => fairings != null;
 
-  Core get getSingleCore => cores[0];
+  Core get getSingleCore => cores![0];
 
   bool isSideCore(Core core) {
     if (id == null || !isHeavy) {
       return false;
     } else {
-      return core != cores.first;
+      return core != cores!.first;
     }
   }
 
   bool get isFirstStageNull {
-    for (final core in cores) {
+    for (final core in cores!) {
       if (core.id != null) return false;
     }
     return true;
   }
 
-  bool get hasMultiplePayload => payloads.length > 1;
+  bool get hasMultiplePayload => payloads!.length > 1;
 
-  Payload get getSinglePayload => payloads[0];
+  Payload get getSinglePayload => payloads![0];
 
   bool get hasCapsule => getSinglePayload.capsule != null;
 
-  Core getCore(String id) => cores.where((core) => core.id == id).single;
+  Core getCore(String id) => cores!.where((core) => core.id == id).single;
 
   @override
   List<Object> get props => [
-        fairings,
-        cores,
-        payloads,
-        name,
-        id,
+        fairings!,
+        cores!,
+        payloads!,
+        name!,
+        id!,
       ];
 }
 
 /// Auxiliary model to storage details about rocket's fairings.
 class FairingsDetails extends Equatable {
-  final bool reused;
-  final bool recoveryAttempt;
-  final bool recovered;
+  final bool? reused;
+  final bool? recoveryAttempt;
+  final bool? recovered;
 
   const FairingsDetails({
     this.reused,
@@ -287,19 +287,19 @@ class FairingsDetails extends Equatable {
 
   @override
   List<Object> get props => [
-        reused,
-        recoveryAttempt,
-        recovered,
+        reused!,
+        recoveryAttempt!,
+        recovered!,
       ];
 }
 
 /// Auxiliar model to storage details about a launch failure.
 class FailureDetails extends Equatable {
-  final num time;
-  final num altitude;
-  final String reason;
+  final num? time;
+  final num? altitude;
+  final String? reason;
 
-  const FailureDetails({this.time, this.altitude, this.reason});
+  const FailureDetails({this.time, this.altitude, this.reason,});
 
   factory FailureDetails.fromJson(Map<String, dynamic> json) {
     return FailureDetails(
@@ -310,8 +310,8 @@ class FailureDetails extends Equatable {
   }
 
   String get getTime {
-    final StringBuffer buffer = StringBuffer('T${time.isNegative ? '-' : '+'}');
-    final int auxTime = time.abs();
+    final StringBuffer buffer = StringBuffer('T${time!.isNegative ? '-' : '+'}');
+    final num auxTime = time!.abs();
 
     if (auxTime < 60) {
       buffer.write('${NumberFormat.decimalPattern().format(auxTime)} s');
@@ -329,12 +329,12 @@ class FailureDetails extends Equatable {
       ? context.translate('spacex.other.unknown')
       : '${NumberFormat.decimalPattern().format(altitude)} km';
 
-  String get getReason => toBeginningOfSentenceCase(reason);
+  String? get getReason => toBeginningOfSentenceCase(reason);
 
   @override
   List<Object> get props => [
-        time,
-        altitude,
-        reason,
+        time!,
+        altitude!,
+        reason!,
       ];
 }

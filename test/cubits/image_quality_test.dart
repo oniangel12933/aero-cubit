@@ -7,10 +7,10 @@ import 'helpers/hydrated.dart';
 void main() {
   initHydratedBloc();
   group('ImageQualityCubit', () {
-    ImageQualityCubit cubit;
+    ImageQualityCubit cubit = ImageQualityCubit();
 
     setUp(() {
-      cubit = ImageQualityCubit();
+      // cubit = ImageQualityCubit();
     });
 
     test('has initial value', () async {

@@ -12,23 +12,23 @@ class MockChangelogRepository extends Mock implements ChangelogRepository {}
 void main() {
   initHydratedBloc();
   group('ChangelogCubit', () {
-    ChangelogCubit cubit;
-    MockChangelogRepository repository;
+    ChangelogCubit? cubit;
+    MockChangelogRepository repository = MockChangelogRepository();
 
     setUp(() {
-      repository = MockChangelogRepository();
+      // repository = MockChangelogRepository();
       cubit = ChangelogCubit(repository);
     });
 
     tearDown(() {
-      cubit.close();
+      cubit!.close();
     });
 
     group('toJson/fromJson', () {
       test('work properly', () {
         expect(
-          cubit.fromJson(cubit.toJson(cubit.state)),
-          cubit.state,
+          cubit!.fromJson(cubit!.toJson(cubit!.state)),
+          cubit!.state,
         );
       });
     });
@@ -40,7 +40,7 @@ void main() {
           when(repository.fetchData()).thenAnswer(
             (_) => Future.value('Lorem'),
           );
-          return cubit;
+          return cubit!;
         },
         act: (cubit) async => cubit.loadData(),
         verify: (_) => verify(repository.fetchData()).called(2),
@@ -54,7 +54,7 @@ void main() {
         'can throw an exception',
         build: () {
           when(repository.fetchData()).thenThrow(Exception('wtf'));
-          return cubit;
+          return cubit!;
         },
         act: (cubit) async => cubit.loadData(),
         verify: (_) => verify(repository.fetchData()).called(2),

@@ -4,18 +4,18 @@ import 'package:latlong2/latlong.dart';
 
 /// Details about a specific launchpad, where rockets are launched from.
 class LaunchpadDetails extends Equatable {
-  final String name;
-  final String fullName;
-  final String locality;
-  final String region;
-  final double latitude;
-  final double longitude;
-  final int launchAttempts;
-  final int launchSuccesses;
-  final String status;
-  final String details;
-  final String imageUrl;
-  final String id;
+  final String? name;
+  final String? fullName;
+  final String? locality;
+  final String? region;
+  final double? latitude;
+  final double? longitude;
+  final int? launchAttempts;
+  final int? launchSuccesses;
+  final String? status;
+  final String? details;
+  final String? imageUrl;
+  final String? id;
 
   const LaunchpadDetails({
     this.name,
@@ -49,9 +49,9 @@ class LaunchpadDetails extends Equatable {
     );
   }
 
-  LatLng get coordinates => LatLng(latitude, longitude);
+  LatLng get coordinates => LatLng(latitude!, longitude!);
 
-  String get getStatus => toBeginningOfSentenceCase(status);
+  String? get getStatus => toBeginningOfSentenceCase(status);
 
   String get getCoordinates =>
       '${coordinates.latitude.toStringAsPrecision(5)},  ${coordinates.longitude.toStringAsPrecision(5)}';
@@ -60,15 +60,15 @@ class LaunchpadDetails extends Equatable {
 
   @override
   List<Object> get props => [
-        name,
-        fullName,
-        locality,
-        region,
-        latitude,
-        longitude,
-        launchAttempts,
-        launchSuccesses,
-        details,
-        id,
+        name!,
+        fullName!,
+        locality!,
+        region!,
+        latitude!,
+        longitude!,
+        launchAttempts!,
+        launchSuccesses!,
+        details!,
+        id!,
       ];
 }

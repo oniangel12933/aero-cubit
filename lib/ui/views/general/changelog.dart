@@ -15,15 +15,15 @@ class ChangelogScreen extends StatelessWidget {
     return RequestSimplePage<ChangelogCubit, String>(
       title: context.translate('about.version.changelog'),
       childBuilder: (context, state, value) => Markdown(
-        data: value,
-        onTapLink: (_, url, __) => context.openUrl(url),
+        data: value!,
+        onTapLink: (_, url, __) => context.openUrl(url!),
         styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context)).copyWith(
           blockSpacing: 10,
-          h2: Theme.of(context).textTheme.subtitle1.copyWith(
+          h2: Theme.of(context).textTheme.subtitle1?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
-          p: Theme.of(context).textTheme.bodyText2.copyWith(
-                color: Theme.of(context).textTheme.caption.color,
+          p: Theme.of(context).textTheme.bodyText2?.copyWith(
+                color: Theme.of(context).textTheme.caption?.color,
               ),
         ),
       ),

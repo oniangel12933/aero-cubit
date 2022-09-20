@@ -16,12 +16,12 @@ import '../../widgets/index.dart';
 class RoadsterPage extends StatelessWidget {
   final String id;
 
-  const RoadsterPage(this.id, {Key key}) : super(key: key);
+  const RoadsterPage(this.id, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final RoadsterVehicle _roadster =
-        context.watch<VehiclesCubit>().getVehicle(id);
+        context.watch<VehiclesCubit>().getVehicle(id) as RoadsterVehicle;
     return Scaffold(
       body: SliverFab(
         floatingWidget: SafeArea(
@@ -31,7 +31,7 @@ class RoadsterPage extends StatelessWidget {
           child: FloatingActionButton(
             heroTag: null,
             tooltip: context.translate('spacex.other.tooltip.watch_replay'),
-            onPressed: () => context.openUrl(_roadster.url),
+            onPressed: () => context.openUrl(_roadster.url!),
             child: Icon(Icons.ondemand_video),
           ),
         ),
@@ -40,7 +40,7 @@ class RoadsterPage extends StatelessWidget {
           SliverBar(
             title: _roadster.name,
             header: SwiperHeader(
-              list: _roadster.photos,
+              list: _roadster.photos!,
               builder: (_, index) => CacheImage(_roadster.getPhoto(index)),
             ),
             actions: <Widget>[
@@ -67,7 +67,7 @@ class RoadsterPage extends StatelessWidget {
                   child: Text(context.translate(item)),
                 )
             ],
-            onMenuItemSelected: (text) => context.openUrl(_roadster.url),
+            onMenuItemSelected: (text) => context.openUrl(_roadster.url!),
           ),
           SliverSafeArea(
             top: false,
@@ -92,7 +92,7 @@ class RoadsterPage extends StatelessWidget {
 
   Widget _roadsterCard(BuildContext context) {
     final RoadsterVehicle _roadster =
-        context.watch<VehiclesCubit>().getVehicle(id);
+        context.watch<VehiclesCubit>().getVehicle(id) as RoadsterVehicle;
     return CardCell.body(
       context,
       title: context.translate('spacex.vehicle.roadster.description.title'),
@@ -108,14 +108,14 @@ class RoadsterPage extends StatelessWidget {
           'Falcon Heavy',
         ),
         Separator.divider(),
-        ExpandText(_roadster.description)
+        ExpandText(_roadster.description!)
       ]),
     );
   }
 
   Widget _vehicleCard(BuildContext context) {
     final RoadsterVehicle _roadster =
-        context.watch<VehiclesCubit>().getVehicle(id);
+        context.watch<VehiclesCubit>().getVehicle(id) as RoadsterVehicle;
     return CardCell.body(
       context,
       title: context.translate('spacex.vehicle.roadster.vehicle.title'),
@@ -143,14 +143,14 @@ class RoadsterPage extends StatelessWidget {
 
   Widget _orbitCard(BuildContext context) {
     final RoadsterVehicle _roadster =
-        context.watch<VehiclesCubit>().getVehicle(id);
+        context.watch<VehiclesCubit>().getVehicle(id) as RoadsterVehicle;
     return CardCell.body(
       context,
       title: context.translate('spacex.vehicle.roadster.orbit.title'),
       child: RowLayout(children: <Widget>[
         RowItem.text(
           context.translate('spacex.vehicle.roadster.orbit.type'),
-          _roadster.getOrbit,
+          _roadster.getOrbit!,
         ),
         RowItem.text(
           context.translate('spacex.vehicle.roadster.orbit.period'),

@@ -9,11 +9,11 @@ class MockChangelogService extends Mock implements ChangelogService {}
 
 void main() {
   group('ChangelogRepository', () {
-    ChangelogService service;
-    ChangelogRepository repository;
+    ChangelogService service = MockChangelogService();
+    ChangelogRepository? repository;
 
     setUp(() {
-      service = MockChangelogService();
+      // service = MockChangelogService();
       repository = ChangelogRepository(service);
     });
 
@@ -26,7 +26,7 @@ void main() {
       ).thenAnswer((_) => Future.value(response));
       when(response.data).thenReturn(json);
 
-      final output = await repository.fetchData();
+      final output = await repository!.fetchData();
       expect(output, json);
     });
   });

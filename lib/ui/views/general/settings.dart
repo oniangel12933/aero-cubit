@@ -10,7 +10,7 @@ import '../../widgets/index.dart';
 
 /// Here lays all available options for the user to configurate.
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({Key key}) : super(key: key);
+  const SettingsScreen({Key? key}) : super(key: key);
 
   static const route = '/settings';
 

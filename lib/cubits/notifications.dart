@@ -9,21 +9,21 @@ import '../utils/index.dart';
 
 /// Serves as a way to communicate with the notification system.
 class NotificationsCubit extends HydratedCubit<DateTime> {
-  final FlutterLocalNotificationsPlugin service;
-  final NotificationDetails notificationDetails;
-  final InitializationSettings initializationSettings;
+  final FlutterLocalNotificationsPlugin? service;
+  final NotificationDetails? notificationDetails;
+  final InitializationSettings? initializationSettings;
 
   NotificationsCubit(
     this.service, {
     this.notificationDetails,
     this.initializationSettings,
   })  : assert(service != null),
-        super(null);
+        super(null!);
 
   /// Initializes the notifications system
   Future<void> init() async {
     try {
-      await service.initialize(initializationSettings);
+      await service!.initialize(initializationSettings!);
     } catch (_) {}
   }
 
@@ -33,29 +33,29 @@ class NotificationsCubit extends HydratedCubit<DateTime> {
   /// Clears previous set notifications if they exist
   void clearPreviousNotifications() {
     if (state != null) {
-      service.cancelAll();
+      service?.cancelAll();
     }
   }
 
   /// Sets the target launch date to null
-  void resetNextLaunchDate() => emit(null);
+  void resetNextLaunchDate() => emit(null!);
 
   /// Checks if it's necceasry to update scheduled notifications
   bool needsToUpdate(DateTime date) => state != date;
 
   /// Schedule new notifications
   Future<void> scheduleNotification({
-    @required int id,
-    @required String title,
-    @required String body,
-    @required tz.TZDateTime dateTime,
+    required int id,
+    required String title,
+    required String body,
+    required tz.TZDateTime dateTime,
   }) async =>
-      service.zonedSchedule(
+      service?.zonedSchedule(
         id,
         title,
         body,
         dateTime,
-        notificationDetails,
+        notificationDetails!,
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.wallClockTime,
@@ -64,10 +64,10 @@ class NotificationsCubit extends HydratedCubit<DateTime> {
   /// Method that handle the schedule of launch notifications over the time
   Future<void> updateNotifications(
     BuildContext context, {
-    @required Launch nextLaunch,
+    required Launch nextLaunch,
   }) async {
     try {
-      if (nextLaunch != null && needsToUpdate(nextLaunch.launchDate)) {
+      if (nextLaunch != null && needsToUpdate(nextLaunch.launchDate!)) {
         // Cancels all previous schedule notifications because the date has changed
         clearPreviousNotifications();
 
@@ -76,7 +76,7 @@ class NotificationsCubit extends HydratedCubit<DateTime> {
           tz.initializeTimeZones();
 
           final utcLaunchDate = tz.TZDateTime.from(
-            nextLaunch.launchDate,
+            nextLaunch.launchDate!,
             tz.UTC,
           );
 
@@ -92,9 +92,9 @@ class NotificationsCubit extends HydratedCubit<DateTime> {
               body: context.translate(
                 'spacex.notifications.launches.body',
                 parameters: {
-                  'rocket': nextLaunch.rocket.name,
-                  'payload': nextLaunch.rocket.getSinglePayload.name,
-                  'orbit': nextLaunch.rocket.getSinglePayload.orbit,
+                  'rocket': nextLaunch.rocket!.name!,
+                  'payload': nextLaunch.rocket!.getSinglePayload.name!,
+                  'orbit': nextLaunch.rocket!.getSinglePayload.orbit!,
                   'time': context.translate(
                     'spacex.notifications.launches.time_tomorrow',
                   ),
@@ -114,9 +114,9 @@ class NotificationsCubit extends HydratedCubit<DateTime> {
               body: context.translate(
                 'spacex.notifications.launches.body',
                 parameters: {
-                  'rocket': nextLaunch.rocket.name,
-                  'payload': nextLaunch.rocket.getSinglePayload.name,
-                  'orbit': nextLaunch.rocket.getSinglePayload.orbit,
+                  'rocket': nextLaunch.rocket!.name!,
+                  'payload': nextLaunch.rocket!.getSinglePayload.name!,
+                  'orbit': nextLaunch.rocket!.getSinglePayload.orbit!,
                   'time': context.translate(
                     'spacex.notifications.launches.time_hour',
                   ),
@@ -138,9 +138,9 @@ class NotificationsCubit extends HydratedCubit<DateTime> {
               body: context.translate(
                 'spacex.notifications.launches.body',
                 parameters: {
-                  'rocket': nextLaunch.rocket.name,
-                  'payload': nextLaunch.rocket.getSinglePayload.name,
-                  'orbit': nextLaunch.rocket.getSinglePayload.orbit,
+                  'rocket': nextLaunch.rocket!.name!,
+                  'payload': nextLaunch.rocket!.getSinglePayload.name!,
+                  'orbit': nextLaunch.rocket!.getSinglePayload.orbit!,
                   'time': context.translate(
                     'spacex.notifications.launches.time_minutes',
                     parameters: {
@@ -153,7 +153,7 @@ class NotificationsCubit extends HydratedCubit<DateTime> {
             );
           }
 
-          setNextLaunchDate(nextLaunch.launchDate);
+          setNextLaunchDate(nextLaunch.launchDate!);
         } else {
           resetNextLaunchDate();
         }
@@ -162,14 +162,14 @@ class NotificationsCubit extends HydratedCubit<DateTime> {
   }
 
   @override
-  DateTime fromJson(Map<String, dynamic> json) {
+  DateTime? fromJson(Map<String, dynamic> json) {
     return json['value'] != null ? DateTime.tryParse(json['value']) : null;
   }
 
   @override
   Map<String, String> toJson(DateTime state) {
     return {
-      'value': state?.toIso8601String(),
+      'value': state.toIso8601String(),
     };
   }
 }

@@ -19,10 +19,10 @@ void main() {
     const channel = MethodChannel('dexterous.com/flutter/local_notifications');
     final log = <MethodCall>[];
 
-    NotificationsCubit cubit;
+    NotificationsCubit? cubit;
     FlutterLocalNotificationsPlugin service;
-    MockBuildContext context;
-    DateTime currentDateTime;
+    MockBuildContext? context;
+    DateTime? currentDateTime;
 
     setUp(() {
       tz.initializeTimeZones();
@@ -62,33 +62,33 @@ void main() {
       });
 
       test('checks notifications initialization', () async {
-        await cubit.init();
+        await cubit!.init();
       });
     });
 
     group('toJson/fromJson', () {
       test('work properly', () {
         expect(
-          cubit.fromJson(cubit.toJson(cubit.state)),
-          cubit.state,
+          cubit!.fromJson(cubit!.toJson(cubit!.state)),
+          cubit!.state,
         );
       });
     });
 
     group('testing date saving', () {
       test('saves new launch date', () {
-        cubit.setNextLaunchDate(DateTime(1970));
-        expect(cubit.state, DateTime(1970));
+        cubit!.setNextLaunchDate(DateTime(1970));
+        expect(cubit!.state, DateTime(1970));
       });
 
       test('checks current launch date', () {
-        cubit.setNextLaunchDate(DateTime(1970));
-        expect(cubit.needsToUpdate(DateTime(1971)), true);
-        expect(cubit.needsToUpdate(DateTime(1970)), false);
+        cubit!.setNextLaunchDate(DateTime(1970));
+        expect(cubit!.needsToUpdate(DateTime(1971)), true);
+        expect(cubit!.needsToUpdate(DateTime(1970)), false);
 
-        cubit.setNextLaunchDate(null);
-        expect(cubit.needsToUpdate(DateTime(1970)), true);
-        expect(cubit.needsToUpdate(DateTime(1971)), true);
+        cubit!.setNextLaunchDate(DateTime(2000));
+        expect(cubit!.needsToUpdate(DateTime(1970)), true);
+        expect(cubit!.needsToUpdate(DateTime(1971)), true);
       });
     });
 
@@ -96,15 +96,15 @@ void main() {
       test(
         "correctly checks that the launch date is not concrete enough",
         () async {
-          await cubit.updateNotifications(
+          await cubit!.updateNotifications(
             MockBuildContext(),
             nextLaunch: _getMockLaunch(
-              launchDate: currentDateTime.add(Duration(days: 5)),
+              launchDate: currentDateTime!.add(Duration(days: 5)),
               datePrecision: 'day',
             ),
           );
 
-          expect(cubit.state, null);
+          expect(cubit!.state, null);
           expect(log.length, isZero);
         },
       );
@@ -112,17 +112,17 @@ void main() {
       test(
         "correctly deletes previous notifications, but launch date is not concrete enough",
         () async {
-          cubit.setNextLaunchDate(DateTime(1970));
+          cubit!.setNextLaunchDate(DateTime(1970));
 
-          await cubit.updateNotifications(
+          await cubit!.updateNotifications(
             MockBuildContext(),
             nextLaunch: _getMockLaunch(
-              launchDate: currentDateTime.add(Duration(days: 5)),
+              launchDate: currentDateTime!.add(Duration(days: 5)),
               datePrecision: 'day',
             ),
           );
 
-          expect(cubit.state, null);
+          expect(cubit!.state, null);
           expect(log.length, 1);
           expect(log[0], isMethodCall('cancelAll', arguments: null));
         },
@@ -131,15 +131,15 @@ void main() {
       test(
         "correctly adds the 30-mins notification to the system",
         () async {
-          await cubit.updateNotifications(
-            context,
+          await cubit!.updateNotifications(
+            context!,
             nextLaunch: _getMockLaunch(
-              launchDate: currentDateTime.add(Duration(minutes: 31)),
+              launchDate: currentDateTime!.add(Duration(minutes: 31)),
               datePrecision: 'hour',
             ),
           );
 
-          expect(cubit.state, currentDateTime.add(Duration(minutes: 31)));
+          expect(cubit!.state, currentDateTime!.add(Duration(minutes: 31)));
           expect(log.length, 1);
           expect(
             log[0],
@@ -155,7 +155,7 @@ void main() {
                 'timeZoneName': 'UTC',
                 'scheduledDateTime': _convertDateToISO8601String(
                   tz.TZDateTime.from(
-                    currentDateTime.add(Duration(minutes: 31)),
+                    currentDateTime!.add(Duration(minutes: 31)),
                     tz.UTC,
                   ).subtract(Duration(minutes: 30)),
                 ),
@@ -168,15 +168,15 @@ void main() {
       test(
         "correctly adds the 30-mins and 1-hour notifications to the system",
         () async {
-          await cubit.updateNotifications(
-            context,
+          await cubit!.updateNotifications(
+            context!,
             nextLaunch: _getMockLaunch(
-              launchDate: currentDateTime.add(Duration(hours: 2)),
+              launchDate: currentDateTime!.add(Duration(hours: 2)),
               datePrecision: 'hour',
             ),
           );
 
-          expect(cubit.state, currentDateTime.add(Duration(hours: 2)));
+          expect(cubit!.state, currentDateTime!.add(Duration(hours: 2)));
           expect(log.length, 2);
           expect(
             log[0],
@@ -192,7 +192,7 @@ void main() {
                 'timeZoneName': 'UTC',
                 'scheduledDateTime': _convertDateToISO8601String(
                   tz.TZDateTime.from(
-                    currentDateTime.add(Duration(hours: 2)),
+                    currentDateTime!.add(Duration(hours: 2)),
                     tz.UTC,
                   ).subtract(Duration(hours: 1)),
                 ),
@@ -213,7 +213,7 @@ void main() {
                 'timeZoneName': 'UTC',
                 'scheduledDateTime': _convertDateToISO8601String(
                   tz.TZDateTime.from(
-                    currentDateTime.add(Duration(hours: 2)),
+                    currentDateTime!.add(Duration(hours: 2)),
                     tz.UTC,
                   ).subtract(Duration(minutes: 30)),
                 ),
@@ -226,15 +226,15 @@ void main() {
       test(
         "correctly update all notifications with no previous notifications",
         () async {
-          await cubit.updateNotifications(
-            context,
+          await cubit!.updateNotifications(
+            context!,
             nextLaunch: _getMockLaunch(
-              launchDate: currentDateTime.add(Duration(days: 5)),
+              launchDate: currentDateTime!.add(Duration(days: 5)),
               datePrecision: 'hour',
             ),
           );
 
-          expect(cubit.state, currentDateTime.add(Duration(days: 5)));
+          expect(cubit!.state, currentDateTime!.add(Duration(days: 5)));
           expect(log.length, 3);
           expect(
             log[0],
@@ -250,7 +250,7 @@ void main() {
                 'timeZoneName': 'UTC',
                 'scheduledDateTime': _convertDateToISO8601String(
                   tz.TZDateTime.from(
-                    currentDateTime.add(Duration(days: 5)),
+                    currentDateTime!.add(Duration(days: 5)),
                     tz.UTC,
                   ).subtract(Duration(days: 1)),
                 ),
@@ -271,7 +271,7 @@ void main() {
                 'timeZoneName': 'UTC',
                 'scheduledDateTime': _convertDateToISO8601String(
                   tz.TZDateTime.from(
-                    currentDateTime.add(Duration(days: 5)),
+                    currentDateTime!.add(Duration(days: 5)),
                     tz.UTC,
                   ).subtract(Duration(hours: 1)),
                 ),
@@ -292,7 +292,7 @@ void main() {
                 'timeZoneName': 'UTC',
                 'scheduledDateTime': _convertDateToISO8601String(
                   tz.TZDateTime.from(
-                    currentDateTime.add(Duration(days: 5)),
+                    currentDateTime!.add(Duration(days: 5)),
                     tz.UTC,
                   ).subtract(Duration(minutes: 30)),
                 ),
@@ -305,7 +305,7 @@ void main() {
   });
 }
 
-Launch _getMockLaunch({DateTime launchDate, String datePrecision}) {
+Launch _getMockLaunch({DateTime? launchDate, String? datePrecision}) {
   return Launch(
     launchDate: launchDate,
     datePrecision: datePrecision,

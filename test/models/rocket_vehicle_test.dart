@@ -145,13 +145,13 @@ void main() {
 
     test('correctly returns fairing height', () {
       expect(
-        RocketVehicle(fairingDimensions: const [null, null])
+        RocketVehicle(fairingDimensions: const [0, 0])
             .fairingHeight(MockBuildContext()),
         'spacex.other.unknown',
       );
 
       expect(
-        RocketVehicle(fairingDimensions: const [10, null])
+        RocketVehicle(fairingDimensions: const [10, 0])
             .fairingHeight(MockBuildContext()),
         '10 m',
       );
@@ -159,13 +159,13 @@ void main() {
 
     test('correctly returns fairing diameter', () {
       expect(
-        RocketVehicle(fairingDimensions: const [null, null])
+        RocketVehicle(fairingDimensions: const [0, 0])
             .fairingDiameter(MockBuildContext()),
         'spacex.other.unknown',
       );
 
       expect(
-        RocketVehicle(fairingDimensions: const [null, 10])
+        RocketVehicle(fairingDimensions: const [0, 10])
             .fairingDiameter(MockBuildContext()),
         '10 m',
       );

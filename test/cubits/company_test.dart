@@ -10,16 +10,16 @@ class MockCompanyRepository extends Mock implements CompanyRepository {}
 
 void main() {
   group('CompanyCubit', () {
-    CompanyCubit cubit;
-    MockCompanyRepository repository;
+    CompanyCubit? cubit;
+    MockCompanyRepository repository = MockCompanyRepository();
 
     setUp(() {
-      repository = MockCompanyRepository();
+      // repository = MockCompanyRepository();
       cubit = CompanyCubit(repository);
     });
 
     tearDown(() {
-      cubit.close();
+      cubit!.close();
     });
 
     group('fetchData', () {
@@ -29,7 +29,7 @@ void main() {
           when(repository.fetchData()).thenAnswer(
             (_) => Future.value(CompanyInfo(id: '1')),
           );
-          return cubit;
+          return cubit!;
         },
         act: (cubit) async => cubit.loadData(),
         verify: (_) => verify(repository.fetchData()).called(2),
@@ -43,7 +43,7 @@ void main() {
         'can throw an exception',
         build: () {
           when(repository.fetchData()).thenThrow(Exception('wtf'));
-          return cubit;
+          return cubit!;
         },
         act: (cubit) async => cubit.loadData(),
         verify: (_) => verify(repository.fetchData()).called(2),

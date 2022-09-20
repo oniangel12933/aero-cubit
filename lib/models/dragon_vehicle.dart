@@ -7,22 +7,22 @@ import 'index.dart';
 
 /// General information about a Dragon capsule.
 class DragonVehicle extends Vehicle {
-  final num crew, launchMass, returnMass;
-  final List<Thruster> thrusters;
-  final bool reusable;
+  final num? crew, launchMass, returnMass;
+  final List<Thruster>? thrusters;
+  final bool? reusable;
 
   const DragonVehicle({
-    String id,
-    String name,
-    String type,
-    String description,
-    String url,
-    num height,
-    num diameter,
-    num mass,
-    bool active,
-    DateTime firstFlight,
-    List<String> photos,
+    String? id,
+    String? name,
+    String? type,
+    String? description,
+    String? url,
+    num? height,
+    num? diameter,
+    num? mass,
+    bool? active,
+    DateTime? firstFlight,
+    List<String>? photos,
     this.crew,
     this.launchMass,
     this.returnMass,
@@ -85,33 +85,33 @@ class DragonVehicle extends Vehicle {
 
   @override
   List<Object> get props => [
-        id,
-        name,
-        type,
-        description,
-        url,
-        height,
-        diameter,
-        mass,
-        active,
-        firstFlight,
-        photos,
-        crew,
-        launchMass,
-        returnMass,
-        thrusters,
-        reusable,
+        id!,
+        name!,
+        type!,
+        description!,
+        url!,
+        height!,
+        diameter!,
+        mass!,
+        active!,
+        firstFlight!,
+        photos!,
+        crew!,
+        launchMass!,
+        returnMass!,
+        thrusters!,
+        reusable!,
       ];
 }
 
 /// Auxiliar model used to storage Dragon's thrusters data.
 class Thruster extends Equatable {
-  final String model;
-  final String fuel;
-  final String oxidizer;
-  final num amount;
-  final num thrust;
-  final num isp;
+  final String? model;
+  final String? fuel;
+  final String? oxidizer;
+  final num? amount;
+  final num? thrust;
+  final num? isp;
 
   const Thruster({
     this.model,
@@ -133,9 +133,9 @@ class Thruster extends Equatable {
     );
   }
 
-  String get getFuel => toBeginningOfSentenceCase(fuel);
+  String? get getFuel => toBeginningOfSentenceCase(fuel);
 
-  String get getOxidizer => toBeginningOfSentenceCase(oxidizer);
+  String? get getOxidizer => toBeginningOfSentenceCase(oxidizer);
 
   String get getAmount => amount.toString();
 
@@ -145,11 +145,11 @@ class Thruster extends Equatable {
 
   @override
   List<Object> get props => [
-        model,
-        fuel,
-        oxidizer,
-        amount,
-        thrust,
-        isp,
+        model!,
+        fuel!,
+        oxidizer!,
+        amount!,
+        thrust!,
+        isp!,
       ];
 }

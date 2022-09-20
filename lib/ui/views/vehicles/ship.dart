@@ -20,7 +20,7 @@ class ShipPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ShipVehicle _ship = context.watch<VehiclesCubit>().getVehicle(id);
+    final ShipVehicle _ship = context.watch<VehiclesCubit>().getVehicle(id) as ShipVehicle;
     return Scaffold(
       body: CustomScrollView(slivers: <Widget>[
         SliverBar(
@@ -37,7 +37,7 @@ class ShipPage extends StatelessWidget {
                   'spacex.other.share.ship.body',
                   parameters: {
                     'date': _ship.getBuiltFullDate,
-                    'name': _ship.name,
+                    'name': _ship.name!,
                     'role': _ship.primaryRole,
                     'port': _ship.homePort,
                     'missions': _ship.hasMissions
@@ -63,7 +63,7 @@ class ShipPage extends StatelessWidget {
                 child: Text(context.translate(item)),
               )
           ],
-          onMenuItemSelected: (text) => context.openUrl(_ship.url),
+          onMenuItemSelected: (text) => context.openUrl(_ship.url!),
         ),
         SliverSafeArea(
           top: false,
@@ -80,7 +80,7 @@ class ShipPage extends StatelessWidget {
   }
 
   Widget _shipCard(BuildContext context) {
-    final ShipVehicle _ship = context.watch<VehiclesCubit>().getVehicle(id);
+    final ShipVehicle _ship = context.watch<VehiclesCubit>().getVehicle(id) as ShipVehicle;
     return CardCell.body(
       context,
       title: context.translate('spacex.vehicle.ship.description.title'),
@@ -106,7 +106,7 @@ class ShipPage extends StatelessWidget {
   }
 
   Widget _specsCard(BuildContext context) {
-    final ShipVehicle _ship = context.watch<VehiclesCubit>().getVehicle(id);
+    final ShipVehicle _ship = context.watch<VehiclesCubit>().getVehicle(id) as ShipVehicle;
     return CardCell.body(
       context,
       title: context.translate('spacex.vehicle.ship.specifications.title'),
@@ -140,7 +140,7 @@ class ShipPage extends StatelessWidget {
   }
 
   Widget _missionsCard(BuildContext context) {
-    final ShipVehicle _ship = context.watch<VehiclesCubit>().getVehicle(id);
+    final ShipVehicle _ship = context.watch<VehiclesCubit>().getVehicle(id) as ShipVehicle;
     return CardCell.body(
       context,
       title: context.translate('spacex.vehicle.ship.missions.title'),
@@ -203,7 +203,7 @@ class ShipPage extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 15,
-                color: Theme.of(context).textTheme.caption.color,
+                color: Theme.of(context).textTheme.caption?.color,
               ),
             ),
     );

@@ -11,16 +11,16 @@ class MockAchievementsRepository extends Mock
 
 void main() {
   group('AchievementsCubit', () {
-    AchievementsCubit cubit;
-    MockAchievementsRepository repository;
+    AchievementsCubit? cubit;
+    MockAchievementsRepository repository = MockAchievementsRepository();
 
     setUp(() {
-      repository = MockAchievementsRepository();
+      // repository = MockAchievementsRepository();
       cubit = AchievementsCubit(repository);
     });
 
     tearDown(() {
-      cubit.close();
+      cubit!.close();
     });
 
     group('fetchData', () {
@@ -30,7 +30,7 @@ void main() {
           when(repository.fetchData()).thenAnswer(
             (_) => Future.value(const [Achievement(id: '1')]),
           );
-          return cubit;
+          return cubit!;
         },
         act: (cubit) async => cubit.loadData(),
         verify: (_) => verify(repository.fetchData()).called(2),
@@ -44,7 +44,7 @@ void main() {
         'can throw an exception',
         build: () {
           when(repository.fetchData()).thenThrow(Exception('wtf'));
-          return cubit;
+          return cubit!;
         },
         act: (cubit) async => cubit.loadData(),
         verify: (_) => verify(repository.fetchData()).called(2),

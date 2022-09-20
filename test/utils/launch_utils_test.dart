@@ -32,11 +32,11 @@ void main() {
     ];
 
     test('returns upcoming launch correctly', () {
-      expect(LaunchUtils.getUpcomingLaunch(_launches).id, '0');
+      expect(LaunchUtils.getUpcomingLaunch(_launches)!.id, '0');
     });
 
     test('returns latest launch correctly', () {
-      expect(LaunchUtils.getLatestLaunch(_launches).id, '2');
+      expect(LaunchUtils.getLatestLaunch(_launches)!.id, '2');
     });
   });
 }

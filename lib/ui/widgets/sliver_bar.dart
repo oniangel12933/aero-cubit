@@ -7,12 +7,12 @@ import 'package:google_fonts/google_fonts.dart';
 class SliverBar extends StatelessWidget {
   static const double heightRatio = 0.3;
 
-  final String title;
-  final Widget header;
-  final num height;
-  final List<Widget> actions;
-  final PopupMenuItemBuilder<String> menuItemBuilder;
-  final PopupMenuItemSelected<String> onMenuItemSelected;
+  final String? title;
+  final Widget? header;
+  final num? height;
+  final List<Widget>? actions;
+  final PopupMenuItemBuilder<String>? menuItemBuilder;
+  final PopupMenuItemSelected<String>? onMenuItemSelected;
 
   const SliverBar({
     this.title,
@@ -30,7 +30,7 @@ class SliverBar extends StatelessWidget {
         parentRoute is PageRoute<dynamic> && parentRoute.fullscreenDialog;
 
     return SliverAppBar(
-      expandedHeight: MediaQuery.of(context).size.height * height,
+      expandedHeight: MediaQuery.of(context).size.height * height!,
       leading: Navigator.of(context).canPop()
           ? useCloseButton
               ? IconButton(
@@ -45,10 +45,10 @@ class SliverBar extends StatelessWidget {
                 )
           : null,
       actions: [
-        ...actions,
+        ...actions!,
         if (menuItemBuilder != null && onMenuItemSelected != null)
           PopupMenuButton<String>(
-            itemBuilder: menuItemBuilder,
+            itemBuilder: menuItemBuilder!,
             onSelected: onMenuItemSelected,
             icon: IconShadow(Icons.adaptive.more),
           ),
@@ -63,7 +63,7 @@ class SliverBar extends StatelessWidget {
             maxWidth: MediaQuery.of(context).size.width * 0.55,
           ),
           child: Text(
-            title,
+            title!,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
             maxLines: 1,

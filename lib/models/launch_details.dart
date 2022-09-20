@@ -3,10 +3,10 @@ import 'package:equatable/equatable.dart';
 /// Storages basic details about a rocket launch.
 /// It serves as a direct link to its details.
 class LaunchDetails extends Equatable {
-  final int flightNumber;
-  final String name;
-  final DateTime date;
-  final String id;
+  final int? flightNumber;
+  final String? name;
+  final DateTime? date;
+  final String? id;
 
   const LaunchDetails({
     this.flightNumber,
@@ -24,13 +24,13 @@ class LaunchDetails extends Equatable {
     );
   }
 
-  DateTime get localDate => date.toLocal();
+  DateTime get localDate => date!.toLocal();
 
   @override
   List<Object> get props => [
-        flightNumber,
-        name,
-        date,
-        id,
+        flightNumber!,
+        name!,
+        date!,
+        id!,
       ];
 }

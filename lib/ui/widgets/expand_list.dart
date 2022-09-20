@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 /// the expanding arrow.
 class ExpandList extends StatelessWidget {
   final Widget child;
-  final String hint;
+  final String? hint;
 
   const ExpandList({
-    Key key,
-    @required this.child,
+    Key? key,
+    required this.child,
     this.hint,
   }) : super(key: key);
 

@@ -7,11 +7,11 @@ import './mock.dart';
 
 void main() {
   group('LaunchesService', () {
-    MockClient client;
-    LaunchesService service;
+    MockClient client = MockClient();
+    LaunchesService? service;
 
     setUp(() {
-      client = MockClient();
+      // client = MockClient();
       service = LaunchesService(client);
     });
 
@@ -28,7 +28,7 @@ void main() {
         ),
       ).thenAnswer((_) => Future.value(response));
 
-      final output = await service.getLaunches();
+      final output = await service!.getLaunches();
       expect(output.data, json);
     });
   });

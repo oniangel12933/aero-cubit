@@ -15,20 +15,20 @@ class ShipVehicle extends Vehicle {
   final num speed;
 
   const ShipVehicle({
-    String id,
-    String name,
-    String url,
-    num mass,
-    bool active,
-    DateTime firstFlight,
-    List<String> photos,
-    this.model,
-    this.use,
-    this.roles,
-    this.missions,
-    this.homePort,
-    this.status,
-    this.speed,
+    required String id,
+    required String name,
+    required String url,
+    required num mass,
+    required bool active,
+    required DateTime firstFlight,
+    required List<String> photos,
+    required this.model,
+    required this.use,
+    required this.roles,
+    required this.missions,
+    required this.homePort,
+    required this.status,
+    required this.speed,
   }) : super(
           id: id,
           name: name,
@@ -64,7 +64,7 @@ class ShipVehicle extends Vehicle {
   @override
   String subtitle(BuildContext context) => context.translate(
         'spacex.vehicle.subtitle.ship_built',
-        parameters: {'date': firstFlight.year.toString()},
+        parameters: {'date': firstFlight!.year.toString()},
       );
 
   String getModel(BuildContext context) =>
@@ -90,13 +90,13 @@ class ShipVehicle extends Vehicle {
 
   @override
   List<Object> get props => [
-        id,
-        name,
-        url,
-        mass,
-        active,
-        firstFlight,
-        photos,
+        id!,
+        name!,
+        url!,
+        mass!,
+        active!,
+        firstFlight!,
+        photos!,
         model,
         use,
         roles,

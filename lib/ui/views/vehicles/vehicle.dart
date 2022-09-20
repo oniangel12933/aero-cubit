@@ -10,11 +10,11 @@ class VehiclePage extends StatelessWidget {
 
   static const route = '/vehicle';
 
-  const VehiclePage({Key key, this.vehicleId}) : super(key: key);
+  const VehiclePage({Key? key, required this.vehicleId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    switch (context.watch<VehiclesCubit>().getVehicle(vehicleId).type) {
+    switch (context.watch<VehiclesCubit>().getVehicle(vehicleId)!.type) {
       case 'rocket':
         return RocketPage(vehicleId);
       case 'capsule':

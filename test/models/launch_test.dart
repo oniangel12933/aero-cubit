@@ -397,7 +397,7 @@ void main() {
       );
 
       expect(
-        Launch(links: const ['google.com', null])
+        Launch(links: const ['google.com', ''])
             .isUrlEnabled('spacex.launch.menu.reddit'),
         false,
       );
@@ -464,7 +464,7 @@ void main() {
         true,
       );
       expect(
-        Launch(links: const [null]).hasVideo,
+        Launch(links: const ['']).hasVideo,
         false,
       );
     });

@@ -7,19 +7,19 @@ import '../utils/index.dart';
 /// General information about SpaceX's company data.
 /// Used in the 'Company' tab, under the SpaceX screen.
 class CompanyInfo extends Equatable {
-  final String city;
-  final String state;
-  final String fullName;
-  final String name;
-  final String founder;
-  final int founded;
-  final int employees;
-  final String ceo;
-  final String cto;
-  final String coo;
-  final num valuation;
-  final String details;
-  final String id;
+  final String? city;
+  final String? state;
+  final String? fullName;
+  final String? name;
+  final String? founder;
+  final int? founded;
+  final int? employees;
+  final String? ceo;
+  final String? cto;
+  final String? coo;
+  final num? valuation;
+  final String? details;
+  final String? id;
 
   const CompanyInfo({
     this.city,
@@ -59,7 +59,7 @@ class CompanyInfo extends Equatable {
         'spacex.company.founded',
         parameters: {
           'founded': founded.toString(),
-          'founder': founder,
+          'founder': founder!,
         },
       );
 
@@ -72,18 +72,18 @@ class CompanyInfo extends Equatable {
 
   @override
   List<Object> get props => [
-        city,
-        state,
-        fullName,
-        name,
-        founder,
-        founded,
-        employees,
-        ceo,
-        cto,
-        coo,
-        valuation,
-        details,
-        id,
+        city!,
+        state!,
+        fullName!,
+        name!,
+        founder!,
+        founded!,
+        employees!,
+        ceo!,
+        cto!,
+        coo!,
+        valuation!,
+        details!,
+        id!,
       ];
 }

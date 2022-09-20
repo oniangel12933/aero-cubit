@@ -7,11 +7,11 @@ import './mock.dart';
 
 void main() {
   group('VehiclesService', () {
-    MockClient client;
-    VehiclesService service;
+    MockClient client = MockClient();
+    VehiclesService? service;
 
     setUp(() {
-      client = MockClient();
+      // client = MockClient();
       service = VehiclesService(client);
     });
 
@@ -28,7 +28,7 @@ void main() {
         ),
       ).thenAnswer((_) => Future.value(response));
 
-      final output = await service.getDragons();
+      final output = await service!.getDragons();
       expect(output.data, json);
     });
 
@@ -45,7 +45,7 @@ void main() {
         ),
       ).thenAnswer((_) => Future.value(response));
 
-      final output = await service.getRoadster();
+      final output = await service!.getRoadster();
       expect(output.data, json);
     });
 
@@ -62,7 +62,7 @@ void main() {
         ),
       ).thenAnswer((_) => Future.value(response));
 
-      final output = await service.getRockets();
+      final output = await service!.getRockets();
       expect(output.data, json);
     });
 
@@ -79,7 +79,7 @@ void main() {
         ),
       ).thenAnswer((_) => Future.value(response));
 
-      final output = await service.getShips();
+      final output = await service!.getShips();
       expect(output.data, json);
     });
   });

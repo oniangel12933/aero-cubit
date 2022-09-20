@@ -11,7 +11,7 @@ class Routes {
   /// Methods that generate all routes
   static Route<dynamic> generateRoute(RouteSettings routeSettings) {
     try {
-      final Map<String, dynamic> args = routeSettings.arguments;
+      final Map<String, dynamic> args = routeSettings.arguments as Map<String, dynamic>;
 
       switch (routeSettings.name) {
         case StartScreen.route:
@@ -113,8 +113,8 @@ class Routes {
 
 class ResponsivePageRoute extends PageRouteBuilder {
   ResponsivePageRoute({
-    RouteSettings settings,
-    @required WidgetBuilder builder,
+    RouteSettings? settings,
+    required WidgetBuilder builder,
     Color barrierColor = const Color(0x80000000),
     Duration transitionDuration = const Duration(milliseconds: 200),
     Curve transitionCurve = Curves.linear,

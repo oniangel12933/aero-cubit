@@ -16,8 +16,8 @@ class LaunchesRepository
     ]..sort();
 
     return [
-      launches.where((l) => l.upcoming).toList(),
-      launches.where((l) => !l.upcoming).toList().reversed.toList()
+      launches.where((l) => l.upcoming!).toList(),
+      launches.where((l) => !l.upcoming!).toList().reversed.toList()
     ];
   }
 }

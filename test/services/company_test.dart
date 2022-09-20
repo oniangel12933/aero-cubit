@@ -7,11 +7,11 @@ import './mock.dart';
 
 void main() {
   group('CompanyService', () {
-    MockClient client;
-    CompanyService service;
+    MockClient client = MockClient();
+    CompanyService? service;
 
     setUp(() {
-      client = MockClient();
+      // client = MockClient();
       service = CompanyService(client);
     });
 
@@ -36,7 +36,7 @@ void main() {
         client.get(Url.companyInformation),
       ).thenAnswer((_) => Future.value(response));
 
-      final output = await service.getCompanyInformation();
+      final output = await service!.getCompanyInformation();
       expect(output.data, json);
     });
   });

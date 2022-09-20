@@ -10,9 +10,9 @@ class AchievementCell extends StatelessWidget {
   final int index;
 
   const AchievementCell({
-    Key key,
-    this.achievement,
-    this.index,
+    Key? key,
+    required this.achievement,
+    required this.index,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class AchievementCell extends StatelessWidget {
           subtitle: achievement.getDate,
           body: achievement.details,
           onTap: achievement.hasLink
-              ? () => context.openUrl(achievement.url)
+              ? () => context.openUrl(achievement.url!)
               : null,
         ),
         Separator.divider(indent: 16),

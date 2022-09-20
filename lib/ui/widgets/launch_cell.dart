@@ -9,13 +9,13 @@ import 'index.dart';
 class LaunchCell extends StatelessWidget {
   final Launch launch;
 
-  const LaunchCell(this.launch, {Key key}) : super(key: key);
+  const LaunchCell(this.launch, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(children: <Widget>[
       ListCell(
-        leading: ProfileImage.small(launch.patchUrl),
+        leading: ProfileImage.small(launch.patchUrl!),
         title: launch.name,
         subtitle: launch.getLaunchDate(context),
         trailing: TrailingText(launch.getNumber),

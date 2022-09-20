@@ -7,11 +7,11 @@ import './mock.dart';
 
 void main() {
   group('ChangelogService', () {
-    MockClient client;
-    ChangelogService service;
+    MockClient client = MockClient();
+    ChangelogService? service;
 
     setUp(() {
-      client = MockClient();
+      // client = MockClient();
       service = ChangelogService(client);
     });
 
@@ -25,7 +25,7 @@ void main() {
         client.get(Url.changelog),
       ).thenAnswer((_) => Future.value(response));
 
-      final output = await service.getChangelog();
+      final output = await service!.getChangelog();
       expect(output.data, json);
     });
   });

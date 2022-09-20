@@ -45,30 +45,30 @@ class _ComapnyInfoView extends StatelessWidget {
                     space: 6,
                     children: <Widget>[
                       Text(
-                        value.fullName,
+                        value!.fullName!,
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.subtitle1,
                       ),
                       Text(
                         value.getFounderDate(context),
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.subtitle1.copyWith(
-                              color: Theme.of(context).textTheme.caption.color,
+                        style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                              color: Theme.of(context).textTheme.caption?.color,
                             ),
                       ),
                     ],
                   ),
                   RowItem.text(
                     context.translate('spacex.company.tab.ceo'),
-                    value.ceo,
+                    value.ceo!,
                   ),
                   RowItem.text(
                     context.translate('spacex.company.tab.cto'),
-                    value.cto,
+                    value.cto!,
                   ),
                   RowItem.text(
                     context.translate('spacex.company.tab.coo'),
-                    value.coo,
+                    value.coo!,
                   ),
                   RowItem.text(
                     context.translate('spacex.company.tab.valuation'),
@@ -82,7 +82,7 @@ class _ComapnyInfoView extends StatelessWidget {
                     context.translate('spacex.company.tab.employees'),
                     value.getEmployees,
                   ),
-                  ExpandText(value.details),
+                  ExpandText(value.details!),
                 ],
               ),
             ),
@@ -111,10 +111,10 @@ class _AchievementsListView extends StatelessWidget {
               shrinkWrap: true,
               primary: false,
               itemBuilder: (context, index) => AchievementCell(
-                achievement: value[index],
+                achievement: value![index],
                 index: index,
               ),
-              itemCount: value.length,
+              itemCount: value!.length,
             ),
           ],
         ),

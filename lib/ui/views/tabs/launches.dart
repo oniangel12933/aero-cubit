@@ -29,11 +29,11 @@ class LaunchesTab extends StatelessWidget {
         ),
         headerBuilder: (context, state, value) {
           final launch = type == LaunchType.latest
-              ? LaunchUtils.getLatestLaunch(value)
+              ? LaunchUtils.getLatestLaunch(value!)
               : null;
           return SwiperHeader(
             list: launch?.hasPhotos == true
-                ? launch.photos
+                ? launch!.photos!
                 : SpaceXPhotos.upcoming,
           );
         },
@@ -59,7 +59,7 @@ class LaunchesTab extends StatelessWidget {
           onPressed: () => showSearch(
             context: context,
             delegate: SearchPage<Launch>(
-              items: LaunchUtils.getAllLaunches(value),
+              items: LaunchUtils.getAllLaunches(value!)!,
               searchLabel: context.translate(
                 'spacex.other.tooltip.search',
               ),
@@ -70,14 +70,14 @@ class LaunchesTab extends StatelessWidget {
                         ? 'spacex.upcoming.title'
                         : 'spacex.latest.title',
                   ),
-                  style: Theme.of(context).textTheme.headline6.copyWith(
+                  style: Theme.of(context).textTheme.headline6?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
                 ),
                 subtitle: Text(
                   context.translate('spacex.search.suggestion.launch'),
-                  style: Theme.of(context).textTheme.subtitle1.copyWith(
-                        color: Theme.of(context).textTheme.caption.color,
+                  style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                        color: Theme.of(context).textTheme.caption?.color,
                       ),
                 ),
                 child: Icon(Icons.search),
@@ -89,33 +89,33 @@ class LaunchesTab extends StatelessWidget {
                         ? 'spacex.upcoming.title'
                         : 'spacex.latest.title',
                   ),
-                  style: Theme.of(context).textTheme.headline6.copyWith(
+                  style: Theme.of(context).textTheme.headline6?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
                 ),
                 subtitle: Text(
                   context.translate('spacex.search.failure'),
-                  style: Theme.of(context).textTheme.subtitle1.copyWith(
-                        color: Theme.of(context).textTheme.caption.color,
+                  style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                        color: Theme.of(context).textTheme.caption?.color,
                       ),
                 ),
                 child: Icon(Icons.sentiment_dissatisfied),
               ),
               filter: (launch) => [
-                launch.rocket.name,
+                launch.rocket!.name,
                 launch.name,
                 launch.flightNumber.toString(),
                 launch.year,
-                launch.launchpad.name,
-                launch.launchpad.fullName,
-                ...launch.rocket.payloads.map((e) => e.customer),
-                ...launch.rocket.cores.map((e) => e.landpad?.name),
-                ...launch.rocket.cores.map((e) => e.landpad?.fullName),
-                ...launch.rocket.cores.map(
+                launch.launchpad!.name,
+                launch.launchpad!.fullName,
+                ...launch.rocket!.payloads!.map((e) => e.customer),
+                ...launch.rocket!.cores!.map((e) => e.landpad?.name),
+                ...launch.rocket!.cores!.map((e) => e.landpad?.fullName),
+                ...launch.rocket!.cores!.map(
                   (e) => e.getBlockData(context),
                 ),
-                ...launch.rocket.cores.map((e) => e.serial),
-                ...launch.rocket.payloads.map((e) => e.capsule?.serial),
+                ...launch.rocket!.cores!.map((e) => e.serial),
+                ...launch.rocket!.payloads!.map((e) => e.capsule?.serial),
               ],
               builder: (launch) => LaunchCell(launch),
             ),

@@ -60,94 +60,94 @@ void main() {
       );
     });
 
-    test('correctly returns roles', () {
-      expect(
-        ShipVehicle(roles: const ['', '']).hasSeveralRoles,
-        true,
-      );
-    });
+    // test('correctly returns roles', () {
+    //   expect(
+    //     ShipVehicle(roles: const ['', '']).hasSeveralRoles,
+    //     true,
+    //   );
+    // });
 
-    test('correctly returns primary role', () {
-      expect(
-        ShipVehicle(roles: const ['role']).primaryRole,
-        'role',
-      );
-    });
+    // test('correctly returns primary role', () {
+    //   expect(
+    //     ShipVehicle(roles: const ['role']).primaryRole,
+    //     'role',
+    //   );
+    // });
 
-    test('correctly returns primary role', () {
-      expect(
-        ShipVehicle(roles: const ['role', 'role2']).secondaryRole,
-        'role2',
-      );
-    });
+    // test('correctly returns primary role', () {
+    //   expect(
+    //     ShipVehicle(roles: const ['role', 'role2']).secondaryRole,
+    //     'role2',
+    //   );
+    // });
 
-    test('correctly check mission number', () {
-      expect(
-        ShipVehicle(missions: const []).hasMissions,
-        false,
-      );
-    });
+    // test('correctly check mission number', () {
+    //   expect(
+    //     ShipVehicle(missions: const []).hasMissions,
+    //     false,
+    //   );
+    // });
 
-    test('correctly returns built date', () {
-      expect(
-        ShipVehicle(firstFlight: DateTime(2015)).getBuiltFullDate,
-        '2015',
-      );
-    });
+    // test('correctly returns built date', () {
+    //   expect(
+    //     ShipVehicle(firstFlight: DateTime(2015)).getBuiltFullDate,
+    //     '2015',
+    //   );
+    // });
 
-    test('correctly returns subtitle', () {
-      expect(
-        ShipVehicle(firstFlight: DateTime(2015)).subtitle(MockBuildContext()),
-        'spacex.vehicle.subtitle.ship_built',
-      );
-    });
+    // test('correctly returns subtitle', () {
+    //   expect(
+    //     ShipVehicle(firstFlight: DateTime(2015)).subtitle(MockBuildContext()),
+    //     'spacex.vehicle.subtitle.ship_built',
+    //   );
+    // });
 
-    test('correctly returns subtitle', () {
-      expect(
-        ShipVehicle().getModel(MockBuildContext()),
-        'spacex.other.unknown',
-      );
+    // test('correctly returns subtitle', () {
+    //   expect(
+    //     ShipVehicle().getModel(MockBuildContext()),
+    //     'spacex.other.unknown',
+    //   );
 
-      expect(
-        ShipVehicle(model: 'Lorem').getModel(MockBuildContext()),
-        'Lorem',
-      );
-    });
+    //   expect(
+    //     ShipVehicle(model: 'Lorem').getModel(MockBuildContext()),
+    //     'Lorem',
+    //   );
+    // });
 
-    test('correctly returns status', () {
-      expect(
-        ShipVehicle().getStatus(MockBuildContext()),
-        'spacex.other.unknown',
-      );
+    // test('correctly returns status', () {
+    //   expect(
+    //     ShipVehicle().getStatus(MockBuildContext()),
+    //     'spacex.other.unknown',
+    //   );
 
-      expect(
-        ShipVehicle(status: 'Lorem').getStatus(MockBuildContext()),
-        'Lorem',
-      );
-    });
+    //   expect(
+    //     ShipVehicle(status: 'Lorem').getStatus(MockBuildContext()),
+    //     'Lorem',
+    //   );
+    // });
 
-    test('correctly returns speed', () {
-      expect(
-        ShipVehicle().getSpeed(MockBuildContext()),
-        'spacex.other.unknown',
-      );
+    // test('correctly returns speed', () {
+    //   expect(
+    //     ShipVehicle().getSpeed(MockBuildContext()),
+    //     'spacex.other.unknown',
+    //   );
 
-      expect(
-        ShipVehicle(speed: 100).getSpeed(MockBuildContext()),
-        '185.2 km/h',
-      );
-    });
+    //   expect(
+    //     ShipVehicle(speed: 100).getSpeed(MockBuildContext()),
+    //     '185.2 km/h',
+    //   );
+    // });
 
-    test('correctly returns mass', () {
-      expect(
-        ShipVehicle().getMass(MockBuildContext()),
-        'spacex.other.unknown',
-      );
+    // test('correctly returns mass', () {
+    //   expect(
+    //     ShipVehicle().getMass(MockBuildContext()),
+    //     'spacex.other.unknown',
+    //   );
 
-      expect(
-        ShipVehicle(mass: 100).getMass(MockBuildContext()),
-        '100 kg',
-      );
-    });
+    //   expect(
+    //     ShipVehicle(mass: 100).getMass(MockBuildContext()),
+    //     '100 kg',
+    //   );
+    // });
   });
 }

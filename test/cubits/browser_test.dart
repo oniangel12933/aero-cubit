@@ -7,10 +7,10 @@ import 'helpers/hydrated.dart';
 void main() {
   initHydratedBloc();
   group('BrowserCubit', () {
-    BrowserCubit cubit;
+    final BrowserCubit cubit = BrowserCubit();
 
     setUp(() {
-      cubit = BrowserCubit();
+      // cubit = BrowserCubit();
     });
 
     test('has initial value', () async {

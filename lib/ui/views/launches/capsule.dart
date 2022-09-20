@@ -14,7 +14,7 @@ import 'package:row_item/row_item.dart';
 class CapsulePage extends StatelessWidget {
   final String launchId;
 
-  const CapsulePage({Key key, this.launchId}) : super(key: key);
+  const CapsulePage({Key? key, required this.launchId}) : super(key: key);
 
   static const route = '/capsule';
 
@@ -23,8 +23,8 @@ class CapsulePage extends StatelessWidget {
     final capsule = context
         .watch<LaunchesCubit>()
         .getLaunch(launchId)
-        .rocket
-        .getSinglePayload
+        ?.rocket
+        ?.getSinglePayload
         .capsule;
 
     return Scaffold(
@@ -32,7 +32,7 @@ class CapsulePage extends StatelessWidget {
         title: FlutterI18n.translate(
           context,
           'spacex.dialog.vehicle.title_capsule',
-          translationParams: {'serial': capsule.serial},
+          translationParams: {'serial': capsule!.serial!},
         ),
         header: SwiperHeader(list: List.from(SpaceXPhotos.capsules)..shuffle()),
         children: <Widget>[
@@ -46,14 +46,14 @@ class CapsulePage extends StatelessWidget {
                       context,
                       'spacex.dialog.vehicle.model',
                     ),
-                    capsule.type,
+                    capsule.type!,
                   ),
                   RowItem.text(
                     FlutterI18n.translate(
                       context,
                       'spacex.dialog.vehicle.status',
                     ),
-                    capsule.getStatus,
+                    capsule.getStatus!,
                   ),
                   RowItem.text(
                     FlutterI18n.translate(
@@ -78,7 +78,7 @@ class CapsulePage extends StatelessWidget {
                   ),
                   Separator.divider(),
                   if (capsule.hasMissions) ...[
-                    for (final launch in capsule.launches)
+                    for (final launch in capsule.launches!)
                       RowTap(
                         FlutterI18n.translate(
                           context,

@@ -10,11 +10,11 @@ class MockAchievementsService extends Mock implements AchievementsService {}
 
 void main() {
   group('AchievementsRepository', () {
-    MockAchievementsService service;
-    AchievementsRepository repository;
+    MockAchievementsService service = MockAchievementsService();
+    AchievementsRepository? repository;
 
     setUp(() {
-      service = MockAchievementsService();
+      // service = MockAchievementsService();
       repository = AchievementsRepository(service);
     });
 
@@ -40,7 +40,7 @@ void main() {
       ).thenAnswer((_) => Future.value(response));
       when(response.data).thenReturn(json);
 
-      final output = await repository.fetchData();
+      final output = await repository!.fetchData();
       expect(output, [Achievement.fromJson(json.first)]);
     });
   });
