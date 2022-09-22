@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 
 class ResponsivePage extends StatelessWidget {
-  final Widget child;
-  final double width;
-  final Size breakpoint;
-  final Duration transformDuration;
-  final Curve transformationCurve;
-
   const ResponsivePage({
     Key? key,
     required this.child,
@@ -15,6 +9,12 @@ class ResponsivePage extends StatelessWidget {
     this.transformDuration = const Duration(milliseconds: 500),
     this.transformationCurve = Curves.easeInOutCubic,
   }) : super(key: key);
+
+  final Size breakpoint;
+  final Widget child;
+  final Duration transformDuration;
+  final Curve transformationCurve;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
