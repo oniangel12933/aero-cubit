@@ -5,27 +5,27 @@ import 'package:flutter_svg/flutter_svg.dart';
 /// This widget helps by forcing a size to a cached image,
 /// or anykind of widget, all around the app.
 class ProfileImage extends StatelessWidget {
-  static const smallSize = 40.0, bigSize = 69.0;
-
-  final String url;
-  final num size;
-  final VoidCallback? onTap;
-
   const ProfileImage({
     required this.url,
     required this.size,
     this.onTap,
   });
 
+  /// Header of a [CardCell] widget.
+  factory ProfileImage.big(String url, {VoidCallback? onTap}) {
+    return ProfileImage(url: url, size: bigSize, onTap: onTap);
+  }
+
   /// Leading parameter of a [ListCell] widget.
   factory ProfileImage.small(String url) {
     return ProfileImage(url: url, size: smallSize);
   }
 
-  /// Header of a [CardCell] widget.
-  factory ProfileImage.big(String url, {VoidCallback? onTap}) {
-    return ProfileImage(url: url, size: bigSize, onTap: onTap);
-  }
+  static const smallSize = 40.0, bigSize = 69.0;
+
+  final VoidCallback? onTap;
+  final num size;
+  final String url;
 
   @override
   Widget build(BuildContext context) {
