@@ -9,9 +9,9 @@ import '../../utils/translate.dart';
 
 /// Stateful widget used to display a countdown to the next launch.
 class LaunchCountdown extends StatefulWidget {
-  final DateTime launchDate;
-
   const LaunchCountdown(this.launchDate);
+
+  final DateTime launchDate;
 
   @override
   State createState() => _LaunchCountdownState();
@@ -20,6 +20,12 @@ class LaunchCountdown extends StatefulWidget {
 class _LaunchCountdownState extends State<LaunchCountdown>
     with TickerProviderStateMixin {
   AnimationController? _controller;
+
+  @override
+  void dispose() {
+    _controller?.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -35,12 +41,6 @@ class _LaunchCountdownState extends State<LaunchCountdown>
   }
 
   @override
-  void dispose() {
-    _controller?.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Countdown(
       animation: StepTween(
@@ -53,14 +53,58 @@ class _LaunchCountdownState extends State<LaunchCountdown>
 }
 
 class Countdown extends AnimatedWidget {
-  final Animation<int> animation;
-  final DateTime launchDate;
-
   const Countdown({
     Key? key,
     required this.animation,
     required this.launchDate,
   }) : super(key: key, listenable: animation);
+
+  final Animation<int> animation;
+  final DateTime launchDate;
+
+  String digitsToString(int digit0, int digit1) =>
+      digit0.toString() + digit1.toString();
+
+  Widget _countdownChild({
+    required BuildContext context,
+    required String title,
+    required String description,
+  }) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        _countdownText(
+          context: context,
+          text: title,
+          fontSize: 42,
+        ),
+        _countdownText(
+          context: context,
+          text: description,
+          fontSize: 16,
+        ),
+      ],
+    );
+  }
+
+  Widget _countdownText(
+      {required BuildContext context,
+      required double fontSize,
+      required String text}) {
+    return Text(
+      text,
+      style: GoogleFonts.robotoMono(
+        fontSize: fontSize,
+        color: Colors.white,
+        shadows: [
+          Shadow(
+            blurRadius: 4,
+            color: Theme.of(context).primaryColor,
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,37 +147,4 @@ class Countdown extends AnimatedWidget {
       ],
     );
   }
-
-  Widget _countdownChild({
-    required BuildContext context,
-    required String title,
-    required String description,
-  }) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        _countdownText(context: context, text: title, fontSize: 42),
-        _countdownText(context: context, text: description, fontSize: 16),
-      ],
-    );
-  }
-
-  Widget _countdownText({required BuildContext context, required double fontSize, required String text}) {
-    return Text(
-      text,
-      style: GoogleFonts.robotoMono(
-        fontSize: fontSize,
-        color: Colors.white,
-        shadows: [
-          Shadow(
-            blurRadius: 4,
-            color: Theme.of(context).primaryColor,
-          ),
-        ],
-      ),
-    );
-  }
-
-  String digitsToString(int digit0, int digit1) =>
-      digit0.toString() + digit1.toString();
 }
