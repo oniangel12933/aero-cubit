@@ -7,9 +7,9 @@ import '../views/launches/index.dart';
 import 'index.dart';
 
 class LaunchCell extends StatelessWidget {
-  final Launch launch;
-
   const LaunchCell(this.launch, {Key? key}) : super(key: key);
+
+  final Launch launch;
 
   @override
   Widget build(BuildContext context) {
