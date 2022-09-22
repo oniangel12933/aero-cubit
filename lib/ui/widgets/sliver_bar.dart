@@ -54,6 +54,7 @@ class SliverBar extends StatelessWidget {
           ),
       ],
       pinned: true,
+      primary: false,
       flexibleSpace: FlexibleSpaceBar(
         centerTitle: true,
         // Using title constraining, because Flutter doesn't do this automatically.

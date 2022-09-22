@@ -7,7 +7,7 @@ import 'helpers/hydrated.dart';
 void main() {
   initHydratedBloc();
   group('ImageQualityCubit', () {
-    ImageQualityCubit cubit = ImageQualityCubit();
+    final ImageQualityCubit cubit = ImageQualityCubit();
 
     setUp(() {
       // cubit = ImageQualityCubit();
